@@ -1,0 +1,15 @@
+{
+  "name": "FooFighter",
+  "version": "0.0.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "phaser": "1.1.6"
+  }
+}
