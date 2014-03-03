@@ -2,6 +2,8 @@
 
 An experiment in making a really crappy starfighter game.
 
+Demo: [http://www.spmurrayzzz.com/dropbox/foofighter/](http://www.spmurrayzzz.com/dropbox/foofighter/)
+
 ## Install
 
 ```bash
