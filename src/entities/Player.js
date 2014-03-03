@@ -13,6 +13,7 @@
 
 function Player ( gameState, group ) {
     this.gameState = gameState;
+    this.config = {};
     this.sprite = {};
     this.movementVelocity = 250;
     this.displayStates = {
@@ -21,9 +22,8 @@ function Player ( gameState, group ) {
         right: 'playerRight.png'
     };
     this.fireTimer = 250;
-    this.shouldFire = true;
+    this.canFire = true;
     this.group = group;
-    this.config = {};
     this.init();
 }
 
@@ -33,7 +33,8 @@ var proto = Player.prototype;
 proto.init = function(){
     this.config.laser = {
         lifespan: 1500,
-        velocity: -500
+        velocity: -500,
+        fireTimer: 250
     };
     this.bindEvents();
 };
@@ -100,17 +101,17 @@ proto.weaponHandler = function(){
         keyboard = this.gameState.keyboard,
         laser;
 
-    if ( !this.shouldFire ) {
+    if ( !this.canFire ) {
         return false;
     }
 
     if ( keyboard.isDown(Phaser.Keyboard.SPACEBAR) ) {
         this.createLaser();
         this.gameState.score += 10;
-        this.shouldFire = false;
+        this.canFire = false;
         setTimeout(function(){
-            this.shouldFire = true;
-        }.bind(this), this.fireTimer);
+            this.canFire = true;
+        }.bind(this), this.config.laser.fireTimer);
     }
 };
 
