@@ -91,7 +91,8 @@ proto.weaponHandler = function(){
     }
 
     if ( keyboard.isDown(Phaser.Keyboard.SPACEBAR) ) {
-        this.createLaser()
+        this.createLaser();
+        this.gameState.score += 10;
         this.shouldFire = false;
         setTimeout(function(){
             this.shouldFire = true;
