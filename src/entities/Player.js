@@ -91,23 +91,29 @@ proto.weaponHandler = function(){
     }
 
     if ( keyboard.isDown(Phaser.Keyboard.SPACEBAR) ) {
-        laser = game.add.sprite(
-            this.sprite.body.x + this.sprite.body.width/2,
-            this.sprite.body.y,
-            'sprites', 'laserGreen.png'
-        );
-        laser.anchor = {
-            x: 0.5,
-            y: 0.5
-        };
-        laser.body.velocity.y = -500;
-        laser.lifespan = 1500;
+        this.createLaser()
         this.shouldFire = false;
         setTimeout(function(){
             this.shouldFire = true;
         }.bind(this), this.fireTimer);
     }
-}
+};
+
+proto.createLaser = function(){
+    var game = this.gameState.game,
+        laser;
+    laser = game.add.sprite(
+        this.sprite.body.x + this.sprite.body.width/2,
+        this.sprite.body.y,
+        'sprites', 'laserGreen.png'
+    );
+    laser.anchor = {
+        x: 0.5,
+        y: 0.5
+    };
+    laser.body.velocity.y = -500;
+    laser.lifespan = 1500;
+};
 
 
 FooFighter.Player = Player;
