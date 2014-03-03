@@ -4,9 +4,10 @@
   "description": "A stupid starfighter game",
   "main": "Gruntfile.js",
   "scripts": {
+    "install": "bower install"
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/grunt"
+    "postinstall": "./node_modules/.bin/grunt"
   },
   "repository": "",
   "author": "Stephen Murray <spmurrayzzz>",
