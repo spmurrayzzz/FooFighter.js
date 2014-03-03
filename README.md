@@ -8,11 +8,8 @@ An experiment in making a really crappy starfighter game.
 # Install global grunt module
 sudo npm install -g grunt
 
-# Install package dependencies
-npm install && bower install
-
-# Build game distributable
-grunt
+# Install package dependencies and build
+npm install
 ```
 
 ## Start app
