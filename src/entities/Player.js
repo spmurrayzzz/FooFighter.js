@@ -38,7 +38,15 @@ proto.bindEvents = function(){
 
 proto.create = function(){
     var game = this.gameState.game;
-    this.sprite = game.add.sprite(0, 0, 'sprites', this.displayStates.neutral);
+    this.sprite = game.add.sprite(
+        game.world.centerX, game.world.centerY,
+        'sprites', this.displayStates.neutral
+    );
+    this.sprite.anchor = {
+        x: 0.5,
+        y: 0.5
+    };
+    this.group.add(sprite);
 };
 
 
