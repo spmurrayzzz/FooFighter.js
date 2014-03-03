@@ -26,12 +26,8 @@ proto.init = function(){
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
-    vent.on('keydown', function( direction ){
+    vent.on('update', function( direction ){
         this.movementHandler(direction);
-    }.bind(this));
-    vent.on('keyup', function( direction ){
-        this.sprite.loadTexture('sprites', this.displayStates.neutral);
-        this.sprite.body.velocity.setTo(0, 0);
     }.bind(this));
 };
 
@@ -46,42 +42,35 @@ proto.create = function(){
         x: 0.5,
         y: 0.5
     };
-    this.group.add(sprite);
-};
-
-
-proto.update = function(){
-
+    this.group.add(this.sprite);
 };
 
 
 proto.movementHandler = function( direction ){
-    var pos = this.sprite.anchor,
-        game = this.gameState.game,
+    var game = this.gameState.game,
         magnitude = this.movementVelocity,
         modifier = 1,
         axis,
-        delta;
+        cursors = this.gameState.cursors;
 
-    switch ( direction ) {
-        case 'down':
-            modifier = 1;
-            axis = 'y';
-            break;
-        case 'up':
-            modifier = -1;
-            axis = 'y';
-            break;
-        case 'left':
-            this.sprite.loadTexture('sprites', this.displayStates.left);
-            modifier = -1;
-            axis = 'x';
-            break;
-        case 'right':
-            this.sprite.loadTexture('sprites', this.displayStates.right);
-            modifier = 1;
-            axis = 'x';
-            break;
+    this.sprite.body.velocity.setTo(0, 0);
+
+    if ( cursors.up.isDown ) {
+        modifier = -1;
+        axis = 'y';
+    } else if ( cursors.down.isDown ) {
+        modifier = 1;
+        axis = 'y';
+    } else if (cursors.left.isDown) {
+        this.sprite.loadTexture('sprites', this.displayStates.left);
+        modifier = -1;
+        axis = 'x';
+    } else if (cursors.right.isDown) {
+        this.sprite.loadTexture('sprites', this.displayStates.right);
+        modifier = 1;
+        axis = 'x';
+    } else {
+        this.sprite.loadTexture('sprites', this.displayStates.neutral);
     }
 
     this.sprite.body.velocity[axis] = (modifier * magnitude);
