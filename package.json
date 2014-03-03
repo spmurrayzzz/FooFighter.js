@@ -4,7 +4,7 @@
   "description": "A stupid starfighter game",
   "main": "Gruntfile.js",
   "scripts": {
-    "install": "bower install",
+    "install": "./node_modules/.bin/bower install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "postinstall": "./node_modules/.bin/grunt"
