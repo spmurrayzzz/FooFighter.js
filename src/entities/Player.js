@@ -11,6 +11,8 @@ function Player ( gameState, group ) {
         left: 'playerLeft.png',
         right: 'playerRight.png'
     };
+    this.fireTimer = 250;
+    this.shouldFire = true;
     this.group = group;
     this.init();
 }
@@ -28,6 +30,7 @@ proto.bindEvents = function(){
     vent.on('create', this.create.bind(this));
     vent.on('update', function(){
         this.movementHandler();
+        this.weaponHandler();
     }.bind(this));
 };
 
@@ -75,6 +78,36 @@ proto.movementHandler = function(){
 
     this.sprite.body.velocity[axis] = (modifier * magnitude);
 };
+
+
+proto.weaponHandler = function(){
+    var game = this.gameState.game,
+        cursors = this.gameState.cursors,
+        keyboard = this.gameState.keyboard,
+        laser;
+
+    if ( !this.shouldFire ) {
+        return false;
+    }
+
+    if ( keyboard.isDown(Phaser.Keyboard.SPACEBAR) ) {
+        laser = game.add.sprite(
+            this.sprite.body.x + this.sprite.body.width/2,
+            this.sprite.body.y,
+            'sprites', 'laserGreen.png'
+        );
+        laser.anchor = {
+            x: 0.5,
+            y: 0.5
+        };
+        laser.body.velocity.y = -500;
+        laser.lifespan = 1500;
+        this.shouldFire = false;
+        setTimeout(function(){
+            this.shouldFire = true;
+        }.bind(this), this.fireTimer);
+    }
+}
 
 
 FooFighter.Player = Player;
