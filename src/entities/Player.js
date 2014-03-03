@@ -23,6 +23,7 @@ function Player ( gameState, group ) {
     this.fireTimer = 250;
     this.shouldFire = true;
     this.group = group;
+    this.config = {};
     this.init();
 }
 
@@ -30,6 +31,10 @@ var proto = Player.prototype;
 
 
 proto.init = function(){
+    this.config.laser = {
+        lifespan: 1500,
+        velocity: -500
+    };
     this.bindEvents();
 };
 
@@ -109,8 +114,11 @@ proto.weaponHandler = function(){
     }
 };
 
+
 proto.createLaser = function(){
     var game = this.gameState.game,
+        velocity = this.config.laser.velocity,
+        lifespan = this.config.laser.lifespan,
         laser;
     laser = game.add.sprite(
         this.sprite.body.x + this.sprite.body.width/2,
@@ -121,11 +129,12 @@ proto.createLaser = function(){
         x: 0.5,
         y: 0.5
     };
-    laser.body.velocity.y = -500;
-    laser.lifespan = 1500;
+    laser.body.velocity.y = velocity;
+    laser.lifespan = lifespan;
 };
 
 
 FooFighter.Player = Player;
+
 
 })(FooFighter);
