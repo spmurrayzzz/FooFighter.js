@@ -1,3 +1,12 @@
+/**
+ * Score.js
+ *
+ * FooFighter.js — Score entity
+ *
+ * This class represents the data model and display entity for
+ * the game score.
+ */
+
 ;(function( FooFighter ){
 
 'use strict';

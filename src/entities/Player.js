@@ -1,4 +1,13 @@
-(function( FooFighter ){
+/**
+ * Player.js
+ *
+ * Foofighter.js — Player entity
+ *
+ * This class represents the data model and display entity for a
+ * Player's startship in the game environment.
+ */
+
+;(function( FooFighter ){
 
 'use strict';
 
