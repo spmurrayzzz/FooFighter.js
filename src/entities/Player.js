@@ -123,7 +123,7 @@ proto.createLaser = function(){
         laser;
     laser = game.add.sprite(
         this.sprite.body.x + this.sprite.body.width/2,
-        this.sprite.body.y,
+        this.sprite.body.y - 10,
         'sprites', 'laserGreen.png'
     );
     laser.anchor = {
