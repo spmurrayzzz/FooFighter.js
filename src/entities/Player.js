@@ -5,7 +5,7 @@
 function Player ( gameState, group ) {
     this.gameState = gameState;
     this.sprite = {};
-    this.movementVelocity = 200;
+    this.movementVelocity = 250;
     this.displayStates = {
         neutral: 'player.png',
         left: 'playerLeft.png',
