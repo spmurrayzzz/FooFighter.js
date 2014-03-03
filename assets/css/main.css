@@ -11,3 +11,7 @@ h1 {
     width: 800px;
     margin: 0 auto;
 }
+
+#main canvas {
+    border-radius: 22px;
+}
