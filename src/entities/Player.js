@@ -26,8 +26,8 @@ proto.init = function(){
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
-    vent.on('update', function( direction ){
-        this.movementHandler(direction);
+    vent.on('update', function(){
+        this.movementHandler();
     }.bind(this));
 };
 
@@ -46,7 +46,7 @@ proto.create = function(){
 };
 
 
-proto.movementHandler = function( direction ){
+proto.movementHandler = function(){
     var game = this.gameState.game,
         magnitude = this.movementVelocity,
         modifier = 1,
