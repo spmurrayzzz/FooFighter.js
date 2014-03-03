@@ -10,6 +10,6 @@
     "tests"
   ],
   "devDependencies": {
-    "phaser": "1.1.6"
+    "phaser": "1.1.5"
   }
 }
