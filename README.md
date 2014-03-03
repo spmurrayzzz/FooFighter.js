@@ -17,7 +17,7 @@ grunt
 
 ## Start app
 
-```
+```bash
 # Start a server @ localhost:8000
 grunt connect
 ```
