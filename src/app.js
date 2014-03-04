@@ -59,6 +59,7 @@ function preload(){
     entities.starsBackground = new FooFighter.StarsBackground(gameState, backGroup);
     entities.player = new FooFighter.Player(gameState, frontGroup);
     entities.score = new FooFighter.Score(gameState, frontGroup);
+    entities.asteroid = new FooFighter.Asteroid(gameState, frontGroup);
 }
 
 
