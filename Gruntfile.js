@@ -25,6 +25,7 @@ module.exports = function(grunt) {
           'src/entities/Score.js',
           'src/entities/StarsBackground.js',
           'src/entities/Player.js',
+          'src/entities/Asteroid.js',
           'src/app.js'
         ],
         dest: 'dist/FooFighter.js'
