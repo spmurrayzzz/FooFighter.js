@@ -37,7 +37,6 @@ proto.bindEvents = function(){
 
 
 proto.create = function(){
-    console.log(this.gameConfig.game.world);
     var game = this.gameConfig.game;
     this.sprite = game.add.sprite(
         game.world.centerX, -50, 'sprites', 'meteorBig.png'
