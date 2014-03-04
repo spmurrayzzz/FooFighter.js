@@ -22,6 +22,7 @@ module.exports = function(grunt) {
           'src/namespace.js',
           'src/vendor/Shout.js',
           'src/models/GameState.js',
+          'src/models/GameAI.js',
           'src/entities/Score.js',
           'src/entities/StarsBackground.js',
           'src/entities/Player.js',
