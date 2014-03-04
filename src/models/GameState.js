@@ -10,7 +10,7 @@
  * leaving it as a prototype-based object for now.
  */
 
-;(function( FooFighter, document ){
+;(function( FooFighter ){
 
 'use strict';
 
@@ -36,4 +36,4 @@ proto.init = function(){
 
 FooFighter.GameState = GameState;
 
-})(FooFighter, document);
+})(FooFighter);
