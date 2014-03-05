@@ -13,21 +13,13 @@
 
 function Score ( gameState, group ) {
     this.gameState = gameState;
+    this.game = gameState.game;
     this.group = group;
     this.text = {};
     this.prefix = 'Score: '
-    this.init();
-}
-
-var proto = Score.prototype;
-
-
-proto.init = function(){
-    var gs = this.gameState,
-        game = this.gameState.game;
-    this.text = game.add.text(
-        game.world.width - 25, 10,
-        this.prefix + gs.score,
+    this.text = this.game.add.text(
+        this.game.world.width - 25, 10,
+        this.prefix + gameState.score,
         { font: "25px Helvetica", fill: "#ffff00", align: "center" }
     );
     this.text.anchor = {
@@ -36,7 +28,9 @@ proto.init = function(){
     };
     this.group.add(this.text);
     this.bindEvents();
-};
+}
+
+var proto = Score.prototype;
 
 
 proto.bindEvents = function(){

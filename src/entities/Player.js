@@ -24,20 +24,15 @@ function Player ( gameState, group ) {
     this.fireTimer = 250;
     this.canFire = true;
     this.group = group;
-    this.init();
-}
-
-var proto = Player.prototype;
-
-
-proto.init = function(){
     this.config.laser = {
         lifespan: 1500,
         velocity: -500,
         fireTimer: 250
     };
     this.bindEvents();
-};
+}
+
+var proto = Player.prototype;
 
 
 proto.bindEvents = function(){

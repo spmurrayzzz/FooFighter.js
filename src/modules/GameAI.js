@@ -6,16 +6,11 @@
 function GameAI ( gameState ){
     this.gameState = gameState;
     this.game = gameState.game;
-    this.init();
+    this.gameState.asteroids = [];
+    this.bindEvents();
 }
 
 var proto = GameAI.prototype;
-
-
-proto.init = function(){
-    this.gameState.asteroids = [];
-    this.bindEvents();
-};
 
 
 proto.bindEvents = function(){

@@ -16,19 +16,14 @@ function Asteroid ( gameConfig, group ) {
     this.group = group;
     this.sprite = {};
     this.lateralRange = [];
-    this.init();
+    this.lifespan = 30000;
+    this.lateralRange = [
+        (gameConfig.game.world.width/2)
+    ];
+    this.bindEvents();
 }
 
 var proto = Asteroid.prototype;
-
-
-proto.init = function(){
-    var game = this.gameConfig.game;
-    this.lateralRange = [
-        (game.world.width/2)
-    ];
-    this.bindEvents();
-};
 
 
 proto.bindEvents = function(){
@@ -45,6 +40,7 @@ proto.create = function(){
         x: 0.5,
         y: 0.5
     };
+    this.sprite.lifespan = this.lifespan;
     this.sprite.body.velocity.y = Math.random() * (250-50) + 50;
     return this;
 };

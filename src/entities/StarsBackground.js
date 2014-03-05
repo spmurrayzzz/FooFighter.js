@@ -14,26 +14,20 @@
 function StarsBackground ( gameState, group ) {
     this.gameState = gameState;
     this.group = group;
-    this.init();
-}
-
-var proto = StarsBackground.prototype;
-
-
-proto.init = function(){
-    var game = this.gameState.game;
     // Background
-    game.load.image(
+    this.gameState.game.load.image(
         'background',
         'assets/img/background.png'
     );
     // Star tile
-    game.load.image(
+    this.gameState.game.load.image(
         'starBackground',
         'assets/img/starBackground.png'
     );
     this.bindEvents();
-};
+}
+
+var proto = StarsBackground.prototype;
 
 
 proto.bindEvents = function(){

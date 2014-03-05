@@ -23,15 +23,9 @@ function GameState ( game ){
     this.keyMap = {};
     this.score = 0;
     this.cursors = {};
-    this.init();
 }
 
 var proto = GameState.prototype;
-
-
-proto.init = function(){
-
-};
 
 
 FooFighter.GameState = GameState;
