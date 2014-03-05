@@ -28,6 +28,7 @@ function Player ( gameState, group ) {
         velocity: -500,
         fireTimer: 250
     };
+    this.lasers = gameState.game.add.group();
     this.bindEvents();
 }
 
@@ -64,7 +65,7 @@ proto.movementHandler = function(){
         modifier = 1,
         axis,
         cursors = this.gameState.cursors;
-
+        console.log(this.lasers);
     this.sprite.body.velocity.setTo(0, 0);
 
     if ( cursors.up.isDown ) {
@@ -119,6 +120,7 @@ proto.createLaser = function(){
         this.sprite.body.y - 10,
         'sprites', 'laserGreen.png'
     );
+    this.lasers.add(laser);
     laser.anchor = {
         x: 0.5,
         y: 0.5
