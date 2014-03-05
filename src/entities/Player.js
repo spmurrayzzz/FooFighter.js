@@ -65,7 +65,7 @@ proto.movementHandler = function(){
         modifier = 1,
         axis,
         cursors = this.gameState.cursors;
-        console.log(this.lasers);
+
     this.sprite.body.velocity.setTo(0, 0);
 
     if ( cursors.up.isDown ) {
@@ -126,12 +126,7 @@ proto.createLaser = function(){
         y: 0.5
     };
     laser.body.velocity.y = velocity;
-    laser.events.onOutOfBounds.add(this.resetLaser, laser);
-};
-
-
-proto.resetLaser = function ( laser ) {
-    laser.kill();
+    laser.events.onOutOfBounds.add(laser.kill, laser);
 };
 
 
