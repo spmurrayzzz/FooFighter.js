@@ -25,7 +25,6 @@ function Player ( gameState, group ) {
     this.canFire = true;
     this.group = group;
     this.config.laser = {
-        lifespan: 1500,
         velocity: -500,
         fireTimer: 250
     };
@@ -114,7 +113,6 @@ proto.weaponHandler = function(){
 proto.createLaser = function(){
     var game = this.gameState.game,
         velocity = this.config.laser.velocity,
-        lifespan = this.config.laser.lifespan,
         laser;
     laser = game.add.sprite(
         this.sprite.body.x + this.sprite.body.width/2,
@@ -126,7 +124,12 @@ proto.createLaser = function(){
         y: 0.5
     };
     laser.body.velocity.y = velocity;
-    laser.lifespan = lifespan;
+    laser.events.onOutOfBounds.add(this.resetLaser, laser);
+};
+
+
+proto.resetLaser = function ( laser ) {
+    laser.kill()
 };
 
 
