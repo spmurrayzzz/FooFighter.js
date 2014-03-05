@@ -6,7 +6,7 @@
 function GameAI ( gameState ){
     this.gameState = gameState;
     this.game = gameState.game;
-    this.gameState.asteroids = [];
+    this.gameState.entities.asteroids = [];
     this.bindEvents();
 }
 
@@ -18,6 +18,7 @@ proto.bindEvents = function(){
     console.log(this);
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
+    vent.on('asteroid-expired', this.cleanupExpiredAsteroid.bind(this));
 };
 
 
@@ -27,15 +28,30 @@ proto.start = function(){
 
 
 proto.createAsteroid = function(){
-    var asteroids = this.gameState.asteroids;
+    var asteroids = this.gameState.entities.asteroids;
     asteroids.push(
         new FooFighter.Asteroid(this.gameState).create()
     );
 };
 
 
-proto.checkCollisions = function(){
+proto.cleanupExpiredAsteroid = function( id ) {
+    var i,
+        asteroids = this.gameState.entities.asteroids,
+        asteroid;
 
+    for (i = 0; i < asteroids.length; i++) {
+        asteroid = asteroids[i];
+        if ( asteroid.id === id ) {
+            asteroids = asteroids.splice(i, 1);
+            return true;
+        }
+    }
+};
+
+
+proto.checkCollisions = function(){
+    console.log(this.gameState.entities.asteroids);
 };
 
 

@@ -16,10 +16,11 @@ function Asteroid ( gameConfig, group ) {
     this.group = group;
     this.sprite = {};
     this.lateralRange = [];
-    this.lifespan = 30000;
+    this.lifespan = 1000;
     this.lateralRange = [
         (gameConfig.game.world.width/2)
     ];
+    this.id = guid();
     this.bindEvents();
 }
 
@@ -42,6 +43,9 @@ proto.create = function(){
     };
     this.sprite.lifespan = this.lifespan;
     this.sprite.body.velocity.y = Math.random() * (250-50) + 50;
+    this.sprite.events.onKilled.dispatch = function(){
+        this.vent.emit('asteroid-expired', this.id);
+    }.bind(this);
     return this;
 };
 
