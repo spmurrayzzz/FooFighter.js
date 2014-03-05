@@ -37,6 +37,7 @@ var proto = Player.prototype;
 
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
+
     vent.on('create', this.create.bind(this));
     vent.on('update', function(){
         this.movementHandler();
@@ -115,6 +116,7 @@ proto.createLaser = function(){
     var game = this.gameState.game,
         velocity = this.config.laser.velocity,
         laser;
+
     laser = game.add.sprite(
         this.sprite.body.x + this.sprite.body.width/2,
         this.sprite.body.y - 10,
