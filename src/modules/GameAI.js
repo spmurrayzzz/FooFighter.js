@@ -15,7 +15,6 @@ var proto = GameAI.prototype;
 
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
-    console.log(this);
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
     vent.on('asteroid-expired', this.cleanupExpiredAsteroid.bind(this));
