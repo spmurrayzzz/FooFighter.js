@@ -36,21 +36,6 @@ proto.createAsteroid = function(){
 };
 
 
-proto.cleanupExpiredAsteroid = function( id ) {
-    var i,
-        asteroids = this.asteroids,
-        asteroid;
-
-    for (i = 0; i < asteroids.length; i++) {
-        asteroid = asteroids[i];
-        if ( asteroid.id === id ) {
-            asteroids = asteroids.splice(i, 1);
-            return true;
-        }
-    }
-};
-
-
 proto.checkCollisions = function(){
     // console.log(this.asteroids);
 };
