@@ -131,7 +131,7 @@ proto.createLaser = function(){
 
 
 proto.resetLaser = function ( laser ) {
-    laser.kill()
+    laser.kill();
 };
 
 
