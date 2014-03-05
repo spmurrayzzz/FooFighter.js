@@ -13,6 +13,7 @@ var proto = GameAI.prototype;
 
 
 proto.init = function(){
+    this.gameState.asteroids = [];
     this.bindEvents();
 };
 
@@ -31,7 +32,10 @@ proto.start = function(){
 
 
 proto.createAsteroid = function(){
-    var foo = new FooFighter.Asteroid(this.gameState).create();
+    var asteroids = this.gameState.asteroids;
+    asteroids.push(
+        new FooFighter.Asteroid(this.gameState).create()
+    );
 };
 
 
