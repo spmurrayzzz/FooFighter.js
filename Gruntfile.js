@@ -20,6 +20,7 @@ module.exports = function(grunt) {
         src: [
           // 'bower_components/phaser/phaser.js',
           'src/namespace.js',
+          'src/modules/Util.js',
           'src/vendor/Shout.js',
           'src/modules/GameState.js',
           'src/modules/GameAI.js',
