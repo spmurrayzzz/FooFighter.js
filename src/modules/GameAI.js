@@ -6,7 +6,8 @@
 function GameAI ( gameState ){
     this.gameState = gameState;
     this.game = gameState.game;
-    this.gameState.entities.asteroids = [];
+    this.gameState.groups.asteroids = this.game.add.group();
+    this.asteroids = this.gameState.groups.asteroids;
     this.bindEvents();
 }
 
@@ -27,16 +28,17 @@ proto.start = function(){
 
 
 proto.createAsteroid = function(){
-    var asteroids = this.gameState.entities.asteroids;
-    asteroids.push(
-        new FooFighter.Asteroid(this.gameState).create()
-    );
+    var asteroids = this.asteroids,
+        newRoid;
+
+    newRoid = new FooFighter.Asteroid(this.gameState).create();
+    asteroids.add(newRoid.sprite);
 };
 
 
 proto.cleanupExpiredAsteroid = function( id ) {
     var i,
-        asteroids = this.gameState.entities.asteroids,
+        asteroids = this.asteroids,
         asteroid;
 
     for (i = 0; i < asteroids.length; i++) {
@@ -50,7 +52,7 @@ proto.cleanupExpiredAsteroid = function( id ) {
 
 
 proto.checkCollisions = function(){
-    // console.log(this.gameState.entities.asteroids);
+    // console.log(this.asteroids);
 };
 
 
