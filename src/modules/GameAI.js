@@ -51,7 +51,7 @@ proto.cleanupExpiredAsteroid = function( id ) {
 
 
 proto.checkCollisions = function(){
-    console.log(this.gameState.entities.asteroids);
+    // console.log(this.gameState.entities.asteroids);
 };
 
 
