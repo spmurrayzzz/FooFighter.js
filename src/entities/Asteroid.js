@@ -10,14 +10,14 @@
 
 'use strict';
 
-function Asteroid ( gameConfig, group ) {
-    this.gameConfig = gameConfig;
-    this.vent = gameConfig.vent;
+function Asteroid ( gameState, group ) {
+    this.gameState = gameState;
+    this.vent = gameState.vent;
     this.group = group;
     this.sprite = {};
     this.lateralRange = [];
     this.lateralRange = [
-        (gameConfig.game.world.width/2)
+        (gameState.game.world.width/2)
     ];
     this.id = guid();
     this.bindEvents();
@@ -27,13 +27,16 @@ var proto = Asteroid.prototype;
 
 
 proto.bindEvents = function(){
-    this.vent.on('create', this.create.bind(this));
+
 };
 
 
 proto.create = function(){
-    var game = this.gameConfig.game,
-        targetX = game.world.width * Math.random();
+    var game = this.gameState.game,
+        targetX = game.world.width * Math.random(),
+        player = this.gameState.entities.player,
+        modifier, xVelocity;
+
     this.sprite = game.add.sprite(
         targetX, -50, 'sprites', 'meteorBig.png'
     );
@@ -42,7 +45,17 @@ proto.create = function(){
         y: 0.5
     };
     this.sprite.events.onOutOfBounds.add(this.sprite.kill);
-    this.sprite.body.velocity.y = Math.random() * (250-50) + 50;
+    this.sprite.body.velocity.y = Math.random() * (250 - 50) + 50;
+    if ( targetX > player.sprite.x ) {
+        modifier = -1;
+        xVelocity = this.sprite.body.velocity.y * modifier;
+    } else if ( targetX === player.sprite.x ) {
+        xVelocity = 0;
+    } else {
+        modifier = 1;
+        xVelocity = this.sprite.body.velocity.y * modifier;
+    }
+    this.sprite.body.velocity.x = xVelocity;
     this.sprite.events.onKilled.dispatch = function(){
         this.vent.emit('asteroid-expired', this.id);
     }.bind(this);
