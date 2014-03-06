@@ -46,6 +46,7 @@ proto.create = function(){
     };
     this.sprite.events.onOutOfBounds.add(this.sprite.kill);
     this.sprite.body.velocity.y = Math.random() * (250 - 50) + 50;
+
     if ( targetX > player.sprite.x ) {
         modifier = -1;
         xVelocity = this.sprite.body.velocity.y * modifier;
@@ -55,10 +56,13 @@ proto.create = function(){
         modifier = 1;
         xVelocity = this.sprite.body.velocity.y * modifier;
     }
+
     this.sprite.body.velocity.x = xVelocity;
+
     this.sprite.events.onKilled.dispatch = function(){
         this.vent.emit('asteroid-expired', this.id);
     }.bind(this);
+
     return this;
 };
 
