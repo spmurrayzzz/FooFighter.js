@@ -28,7 +28,7 @@ function Player ( gameState, group ) {
         velocity: -500,
         fireTimer: 250
     };
-    this.lasers = gameState.game.add.group();
+    this.lasers = gameState.groups.lasers;
     this.bindEvents();
 }
 

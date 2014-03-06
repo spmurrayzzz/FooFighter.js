@@ -56,12 +56,10 @@ function preload(){
         'assets/json/space-sheet.json'
     );
 
+    gameState.gameAI = new FooFighter.GameAI(gameState);
     entities.starsBackground = new FooFighter.StarsBackground(gameState, backGroup);
     entities.player = new FooFighter.Player(gameState, frontGroup);
     entities.score = new FooFighter.Score(gameState, frontGroup);
-    entities.asteroid = new FooFighter.Asteroid(gameState, frontGroup);
-
-    gameState.gameAI = new FooFighter.GameAI(gameState);
 }
 
 

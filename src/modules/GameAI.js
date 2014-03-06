@@ -7,7 +7,9 @@ function GameAI ( gameState ){
     this.gameState = gameState;
     this.game = gameState.game;
     this.gameState.groups.asteroids = this.game.add.group();
+    this.gameState.groups.lasers = this.game.add.group();
     this.asteroids = this.gameState.groups.asteroids;
+    this.lasers = this.gameState.groups.lasers;
     this.bindEvents();
 }
 
@@ -18,7 +20,6 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
-    vent.on('asteroid-expired', this.cleanupExpiredAsteroid.bind(this));
 };
 
 
@@ -37,7 +38,14 @@ proto.createAsteroid = function(){
 
 
 proto.checkCollisions = function(){
-    // console.log(this.asteroids);
+    this.game.physics.overlap(
+        this.asteroids, this.lasers, this.collisionHandler, null, this
+    );
+};
+
+
+proto.collisionHandler = function(){
+    console.log('foo');
 };
 
 
