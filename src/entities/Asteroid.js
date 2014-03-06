@@ -15,10 +15,6 @@ function Asteroid ( gameState, group ) {
     this.vent = gameState.vent;
     this.group = group;
     this.sprite = {};
-    this.lateralRange = [];
-    this.lateralRange = [
-        (gameState.game.world.width/2)
-    ];
     this.id = guid();
     this.bindEvents();
 }
