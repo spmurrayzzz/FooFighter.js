@@ -27,7 +27,7 @@ var proto = Asteroid.prototype;
 
 
 proto.bindEvents = function(){
-
+    this.vent.on('update', this.adjustVelocity.bind(this));
 };
 
 
@@ -64,6 +64,11 @@ proto.create = function(){
     }.bind(this);
 
     return this;
+};
+
+
+proto.adjustVelocity = function(){
+
 };
 
 
