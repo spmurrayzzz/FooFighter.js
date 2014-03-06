@@ -44,8 +44,9 @@ proto.checkCollisions = function(){
 };
 
 
-proto.collisionHandler = function(){
-    console.log('foo');
+proto.collisionHandler = function( asteroid, laser ) {
+    asteroid.kill();
+    laser.kill();
 };
 
 
