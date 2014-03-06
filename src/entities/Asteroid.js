@@ -32,9 +32,10 @@ proto.bindEvents = function(){
 
 
 proto.create = function(){
-    var game = this.gameConfig.game;
+    var game = this.gameConfig.game,
+        targetX = game.world.width * Math.random();
     this.sprite = game.add.sprite(
-        game.world.centerX, -50, 'sprites', 'meteorBig.png'
+        targetX, -50, 'sprites', 'meteorBig.png'
     );
     this.sprite.anchor = {
         x: 0.5,

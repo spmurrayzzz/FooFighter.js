@@ -14,8 +14,6 @@
 function GameAI ( gameState ){
     this.gameState = gameState;
     this.game = gameState.game;
-    this.gameState.groups.asteroids = this.game.add.group();
-    this.gameState.groups.lasers = this.game.add.group();
     this.asteroids = this.gameState.groups.asteroids;
     this.lasers = this.gameState.groups.lasers;
     this.bindEvents();
@@ -55,6 +53,7 @@ proto.checkCollisions = function(){
 proto.collisionHandler = function( asteroid, laser ) {
     asteroid.kill();
     laser.kill();
+    this.gameState.score += 10;
 };
 
 

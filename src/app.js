@@ -39,11 +39,17 @@ var gameConfig = {
 function preload(){
     var entities    = gameState.entities,
         backGroup   = game.add.group(),
-        frontGroup  = game.add.group();
+        frontGroup  = game.add.group(),
+        asteroids   = game.add.group(),
+        lasers      = game.add.group(),
+        hudGroup    = game.add.group();
 
     gameState.groups = {
         backGroup: backGroup,
-        frontGroup: frontGroup
+        frontGroup: frontGroup,
+        hudGroup: hudGroup,
+        asteroids: asteroids,
+        lasers: lasers
     };
 
     gameState.cursors = game.input.keyboard.createCursorKeys();
@@ -59,7 +65,7 @@ function preload(){
     gameState.gameAI = new FooFighter.GameAI(gameState);
     entities.starsBackground = new FooFighter.StarsBackground(gameState, backGroup);
     entities.player = new FooFighter.Player(gameState, frontGroup);
-    entities.score = new FooFighter.Score(gameState, frontGroup);
+    entities.score = new FooFighter.Score(gameState, hudGroup);
 }
 
 
