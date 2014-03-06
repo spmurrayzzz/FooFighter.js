@@ -16,7 +16,8 @@ var gameConfig = {
         canvas: {
             width: 800,
             height: 600
-        }
+        },
+        hasStarted: false
 },
     game = new Phaser.Game(
         gameConfig.canvas.width,
@@ -79,6 +80,10 @@ function create(){
 }
 
 function update(){
+    if ( !gameConfig.hasStarted ) {
+        gameState.vent.emit('start');
+        gameConfig.hasStarted = true;
+    }
     gameState.vent.emit('update');
 }
 
