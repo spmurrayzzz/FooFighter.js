@@ -1,4 +1,4 @@
-## FooFighter.js
+# FooFighter.js
 
 An experiment in making a really crappy starfighter game.
 
