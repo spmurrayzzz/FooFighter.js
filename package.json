@@ -8,7 +8,7 @@
     "start": "node server.js",
     "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/.bin/grunt"
   },
-  "repository": "",
+  "repository": "https://github.com/spmurrayzzz/FooFighter.js",
   "author": "Stephen Murray <spmurrayzzz>",
   "license": "MIT",
   "devDependencies": {
