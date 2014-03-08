@@ -31,7 +31,8 @@ function StarsBackground ( gameState, group ) {
     this.config = {
         starThrottle: {
             time: 250
-        }
+        },
+        fieldSpeed: 800
     };
     this.shouldAddStar = true;
     this.bindEvents();
@@ -85,6 +86,7 @@ proto.moveField = function(){
 
 proto.addBackgroundStar = function(){
     var throttleVal = this.config.starThrottle.time,
+        fieldSpeed = this.config.fieldSpeed,
         game = this.gameState.game,
         gameState = this.gameState,
         star;
@@ -95,9 +97,9 @@ proto.addBackgroundStar = function(){
             -100,
             'speedLine'
         );
-        star.alpha = 0.2;
+        star.alpha = 0.13;
         star.events.onOutOfBounds.add(star.kill, star);
-        star.body.velocity.y = 800;
+        star.body.velocity.y = fieldSpeed;
         this.shouldAddStar = false;
         setTimeout(function(){
             this.shouldAddStar = true;
