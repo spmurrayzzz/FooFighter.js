@@ -29,12 +29,13 @@ function StarField ( gameState, group ) {
         'assets/img/starBackground.png'
     );
     this.config = {
-        starThrottle: {
-            time: 250
-        },
         field: {
-            speed: 800,
-            opacity: 0.11
+            lineSpeed: 1000,
+            starSpeed: 800,
+            lineOpacity: 0.11,
+            starOpacity: 0.5,
+            lineThrottle: 250,
+            starThrottle: 50
         }
     };
     this.shouldAddStar = true;
@@ -50,6 +51,7 @@ proto.bindEvents = function(){
     vent.on('create', this.create.bind(this));
     vent.on('update', this.moveField.bind(this));
     vent.on('update', this.addSpeedLine.bind(this));
+    vent.on('update', this.addStar.bind(this));
     return this;
 };
 
@@ -89,24 +91,50 @@ proto.moveField = function(){
 
 
 proto.addSpeedLine = function(){
-    var throttleVal = this.config.starThrottle.time,
+    var throttleVal = this.config.field.lineThrottle,
+        field = this.config.field,
+        game = this.gameState.game,
+        gameState = this.gameState,
+        line;
+
+    if ( this.shouldAddSpeedLine ) {
+        line = game.add.sprite(
+            game.world.width * Math.random(),
+            -100,
+            'speedLine'
+        );
+        line.alpha = field.lineOpacity;
+        line.events.onOutOfBounds.add(line.kill, line);
+        line.body.velocity.y = field.lineSpeed;
+        this.shouldAddSpeedLine = false;
+        setTimeout(function(){
+            this.shouldAddSpeedLine = true;
+        }.bind(this), throttleVal);
+    }
+
+    return line;
+};
+
+proto.addStar = function(){
+    var throttleVal = this.config.field.starThrottle,
         field = this.config.field,
         game = this.gameState.game,
         gameState = this.gameState,
         star;
 
-    if ( this.shouldAddSpeedLine ) {
+    if ( this.shouldAddStar ) {
         star = game.add.sprite(
             game.world.width * Math.random(),
-            -100,
-            'speedLine'
+            0,
+            'sprites',
+            'Background/starSmall.png'
         );
-        star.alpha = field.opacity;
+        star.alpha = field.starOpacity;
         star.events.onOutOfBounds.add(star.kill, star);
-        star.body.velocity.y = field.speed;
-        this.shouldAddSpeedLine = false;
+        star.body.velocity.y = field.starSpeed;
+        this.shouldAddStar = false;
         setTimeout(function(){
-            this.shouldAddSpeedLine = true;
+            this.shouldAddStar = true;
         }.bind(this), throttleVal);
     }
 
