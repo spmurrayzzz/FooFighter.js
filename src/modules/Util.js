@@ -1,3 +1,10 @@
+/**
+ * Util.js
+ *
+ * FooFighter.js — Util module
+ *
+ * Convenience utility functions for Fun and Profit™
+ */
 
 ;(function( FooFighter ){
 
