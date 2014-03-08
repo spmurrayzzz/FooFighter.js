@@ -39,7 +39,7 @@ proto.bindEvents = function(){
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
     vent.on('update', this.addEnemiesCheck.bind(this));
-    vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
+    // vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
     return this;
 };
 
@@ -89,19 +89,33 @@ proto.createAsteroid = function(){
 
 proto.checkCollisions = function(){
     this.game.physics.collide(
-        this.asteroids, this.lasers, this.collisionHandler, null, this
+        this.asteroids,
+        this.lasers,
+        this.collisionHandlerLaser,
+        null,
+        this
+    );
+    this.game.physics.collide(
+        this.gameState.entities.player.sprite,
+        this.asteroids, this.collisionHandlerPlayer,
+        null,
+        this
     );
     return this;
 };
 
 
-proto.collisionHandler = function ( asteroid, laser ) {
+proto.collisionHandlerLaser = function ( asteroid, laser ) {
     var points = this.config.points;
 
     asteroid.kill();
     laser.kill();
     this.gameState.score += points[asteroid.currentFrame.name];
-    return this;
+};
+
+
+proto.collisionHandlerPlayer = function ( player, asteroid ) {
+    player.kill();
 };
 
 
