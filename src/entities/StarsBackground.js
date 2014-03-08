@@ -33,7 +33,7 @@ var proto = StarsBackground.prototype;
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
-    vent.on('update', this.update.bind(this));
+    vent.on('update', this.moveField.bind(this));
     return this;
 };
 
@@ -60,13 +60,14 @@ proto.create = function(){
 };
 
 
-proto.update = function(){
+proto.moveField = function(){
     var stars = this.group;
 
     // This is a bit of a hack, we're just moving the background
     // group along the Y axis and starting over when we go too far
     stars.y = stars.y > 768 ? 0 : stars.y;
     stars.y += 4.0;
+
     return this;
 };
 
