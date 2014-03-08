@@ -100,7 +100,7 @@ proto.weaponHandler = function(){
         keyboard = this.gameState.keyboard,
         laser;
 
-    if ( !this.canFire ) {
+    if ( !this.canFire || !this.sprite.alive ) {
         return false;
     }
 
