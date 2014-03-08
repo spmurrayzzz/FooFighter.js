@@ -38,6 +38,7 @@ function StarField ( gameState, group ) {
         }
     };
     this.shouldAddStar = true;
+    this.shouldAddSpeedLine = true;
     this.bindEvents();
 }
 
@@ -94,7 +95,7 @@ proto.addSpeedLine = function(){
         gameState = this.gameState,
         star;
 
-    if ( this.shouldAddStar ) {
+    if ( this.shouldAddSpeedLine ) {
         star = game.add.sprite(
             game.world.width * Math.random(),
             -100,
@@ -103,9 +104,9 @@ proto.addSpeedLine = function(){
         star.alpha = field.opacity;
         star.events.onOutOfBounds.add(star.kill, star);
         star.body.velocity.y = field.speed;
-        this.shouldAddStar = false;
+        this.shouldAddSpeedLine = false;
         setTimeout(function(){
-            this.shouldAddStar = true;
+            this.shouldAddSpeedLine = true;
         }.bind(this), throttleVal);
     }
 
