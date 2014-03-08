@@ -36,7 +36,10 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '<%= banner %>'
+        banner: '<%= banner %>',
+        sourceMap: 'dist/FooFighter.min.map',
+        sourceMappingURL: 'dist/FooFighter.min.map',
+        sourceMapPrefix: 1
       },
       dist: {
         src: '<%= concat.dist.dest %>',
