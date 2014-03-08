@@ -88,7 +88,7 @@ proto.createAsteroid = function(){
 
 
 proto.checkCollisions = function(){
-    this.game.physics.overlap(
+    this.game.physics.collide(
         this.asteroids, this.lasers, this.collisionHandler, null, this
     );
     return this;
