@@ -114,6 +114,7 @@ proto.asteroidExplosion = function ( asteroid ) {
     for (i = 0; i < 3; i++) {
         this.createAsteroid();
     }
+    return this;
 };
 
 
