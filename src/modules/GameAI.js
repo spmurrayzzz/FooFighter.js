@@ -20,7 +20,12 @@ function GameAI ( gameState ){
     this.gameInProgress = false;
     this.lastEnemyCreated = d.getTime();
     this.config = {
-        enemyThrottleVal: 1000
+        enemyThrottleVal: 1000,
+        bigToSmallPercentage: 0.7,
+        points: {
+            'meteorBig.png': 5,
+            'meteorSmall.png': 10
+        }
     };
     this.bindEvents();
 }
@@ -65,9 +70,15 @@ proto.addEnemiesCheck = function(){
 
 proto.createAsteroid = function(){
     var asteroids = this.asteroids,
+        percent = this.config.bigToSmallPercentage,
+        sizeVal = 0,
         newRoid;
 
-    newRoid = new FooFighter.Asteroid(this.gameState).create();
+    if ( Math.random() >= percent ) {
+        sizeVal = 1;
+    }
+
+    newRoid = new FooFighter.Asteroid(this.gameState).create(sizeVal);
     asteroids.add(newRoid.sprite);
     return this;
 };
@@ -82,9 +93,10 @@ proto.checkCollisions = function(){
 
 
 proto.collisionHandler = function( asteroid, laser ) {
+    var points = this.config.points;
     asteroid.kill();
     laser.kill();
-    this.gameState.score += 10;
+    this.gameState.score += points[asteroid.currentFrame.name];
     return this;
 };
 

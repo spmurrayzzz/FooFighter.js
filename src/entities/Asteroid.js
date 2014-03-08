@@ -19,6 +19,10 @@ function Asteroid ( gameState, group ) {
         min: 50,
         max: 250
     };
+    this.types = {
+        0: 'Big',
+        1: 'Small'
+    };
     this.bindEvents();
 }
 
@@ -31,17 +35,19 @@ proto.bindEvents = function(){
 };
 
 
-proto.create = function(){
+proto.create = function( typeVal ) {
     var game = this.gameState.game,
         targetX = game.world.width * Math.random(),
         player = this.gameState.entities.player,
         minVelocity = this.velocityRange.min,
         maxVelocity = this.velocityRange.max,
         randInRange = FooFighter.Util.randInRange,
-        modifier, xVelocity;
+        size = this.types[typeVal] || 'Big',
+        modifier,
+        xVelocity;
 
     this.sprite = game.add.sprite(
-        targetX, -50, 'sprites', 'meteorBig.png'
+        targetX, -50, 'sprites', 'meteor' + size + '.png'
     );
     this.sprite.anchor = {
         x: 0.5,
