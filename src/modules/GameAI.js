@@ -25,7 +25,12 @@ function GameAI ( gameState ){
         points: {
             'meteorBig.png': 5,
             'meteorSmall.png': 10
-        }
+        },
+        explosionVelocites: [
+            -100,
+            0,
+            100
+        ]
     };
     this.bindEvents();
 }
@@ -39,7 +44,7 @@ proto.bindEvents = function(){
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
     vent.on('update', this.addEnemiesCheck.bind(this));
-    // vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
+    vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
     return this;
 };
 
@@ -71,19 +76,22 @@ proto.addEnemiesCheck = function(){
 };
 
 
-proto.createAsteroid = function(){
+proto.createAsteroid = function( pos, sizeVal ){
     var asteroids = this.asteroids,
         percent = this.config.bigToSmallPercentage,
-        sizeVal = 0,
+        isUndefined = FooFighter.Util.isUndefined,
         newRoid;
 
-    if ( Math.random() >= percent ) {
-        sizeVal = 1;
+    if ( isUndefined(sizeVal) ) {
+        sizeVal = 0;
+        if ( Math.random() >= percent ) {
+            sizeVal = 1;
+        }
     }
 
-    newRoid = new FooFighter.Asteroid(this.gameState).create(sizeVal);
+    newRoid = new FooFighter.Asteroid(this.gameState).create(sizeVal, pos);
     asteroids.add(newRoid.sprite);
-    return this;
+    return newRoid;
 };
 
 
@@ -123,11 +131,22 @@ proto.asteroidExplosion = function ( asteroid ) {
     var type = asteroid.sprite.currentFrame.name,
         posX = asteroid.sprite.x,
         posY = asteroid.sprite.y,
+        randInRange = FooFighter.Util.randInRange,
+        seed = 20,
+        velocities = this.config.explosionVelocites,
+        roid,
         i;
 
-    for (i = 0; i < 3; i++) {
-        this.createAsteroid();
+    if ( asteroid.sprite.currentFrame.name === 'meteorBig.png' ) {
+        for (i = 0; i < 3; i++) {
+            roid = this.createAsteroid({
+                x: randInRange(posX - seed, posX + seed),
+                y: randInRange(posY - seed, posY + seed),
+            },1);
+            roid.sprite.body.velocity.x = velocities[i];
+        }
     }
+
     return this;
 };
 

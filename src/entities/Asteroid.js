@@ -35,19 +35,26 @@ proto.bindEvents = function(){
 };
 
 
-proto.create = function( typeVal ) {
+proto.create = function( typeVal, pos ) {
     var game = this.gameState.game,
         targetX = game.world.width * Math.random(),
+        targetY = -50,
         player = this.gameState.entities.player,
         minVelocity = this.velocityRange.min,
         maxVelocity = this.velocityRange.max,
         randInRange = FooFighter.Util.randInRange,
+        isUndefined = FooFighter.Util.isUndefined,
         size = this.types[typeVal] || 'Big',
         modifier,
         xVelocity;
 
+    if ( !isUndefined(pos) ) {
+        targetX = pos.x;
+        targetY = pos.y;
+    }
+
     this.sprite = game.add.sprite(
-        targetX, -50, 'sprites', 'meteor' + size + '.png'
+        targetX, targetY, 'sprites', 'meteor' + size + '.png'
     );
     this.sprite.anchor = {
         x: 0.5,
