@@ -25,6 +25,7 @@ module.exports = function(grunt) {
           'src/modules/GameState.js',
           'src/modules/GameAI.js',
           'src/entities/Score.js',
+          'src/entities/Timer.js',
           'src/entities/StarsBackground.js',
           'src/entities/Player.js',
           'src/entities/Asteroid.js',
