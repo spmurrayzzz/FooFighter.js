@@ -59,19 +59,21 @@ proto.bindEvents = function(){
 proto.create = function(){
     var gs = this.gameState,
         game = gs.game,
-        stars;
+        stars,
+        tile;
 
     // Add the solid background sprite entity
-    this.group.add(
+    this.gameState.groups.background.add(
         game.add.tileSprite(0, 0, 800, 600, 'background')
     );
 
-    // In the same group, use our star tile png to create
+    // In another group, use our star tile png to create
     // the starfield background
     stars = this.group;
     for (var x = -4; x < 4; x++) {
         for (var y = -3; y < 3; y++) {
-            stars.create(x*254, y*256, 'starBackground');
+            tile = stars.create(x*254, y*256, 'starBackground');
+            tile.alpha = 0.35;
         }
     };
     return this;

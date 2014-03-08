@@ -39,6 +39,7 @@ var gameConfig = {
  */
 function preload(){
     var entities    = gameState.entities,
+        background  = game.add.group(),
         backGroup   = game.add.group(),
         frontGroup  = game.add.group(),
         asteroids   = game.add.group(),
@@ -47,6 +48,7 @@ function preload(){
 
     // Keep group references so we can maintain a proper display index
     gameState.groups = {
+        background: background,
         backGroup: backGroup,
         frontGroup: frontGroup,
         hudGroup: hudGroup,
@@ -67,7 +69,7 @@ function preload(){
 
     // Create discrete game objects/entities
     gameState.gameAI = new FooFighter.GameAI(gameState);
-    entities.starsBackground = new FooFighter.StarField(gameState, backGroup);
+    entities.starField = new FooFighter.StarField(gameState, backGroup);
     entities.player = new FooFighter.Player(gameState, frontGroup);
     entities.score = new FooFighter.Score(gameState, hudGroup);
 }
