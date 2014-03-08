@@ -48,21 +48,28 @@ proto.create = function( typeVal, pos ) {
         modifier,
         xVelocity;
 
+    // Allow for a predefined point position
     if ( !isUndefined(pos) ) {
         targetX = pos.x;
         targetY = pos.y;
     }
 
+    // Start building the sprite from our atlas
     this.sprite = game.add.sprite(
         targetX, targetY, 'sprites', 'meteor' + size + '.png'
     );
+    // Put the anchor in the center of the sprite
     this.sprite.anchor = {
         x: 0.5,
         y: 0.5
     };
+    // Make sure we detect when the sprite is outside of the game scene
     this.sprite.events.onOutOfBounds.add(this.sprite.kill);
+    // Give our asteroid a random Y axis velocity
     this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
 
+    // X axis velocity should be static in magnitude, but intelligent
+    // with respect to its direction (towards player)
     xVelocity = 10;
     if ( targetX > player.sprite.x ) {
         modifier = -1;
@@ -73,6 +80,8 @@ proto.create = function( typeVal, pos ) {
     }
     this.sprite.body.velocity.x = xVelocity * modifier;
 
+    // If an asteroid happens to be killed by a laser, make sure
+    // we fire an event so we can trigger a possible explosion
     this.sprite.events.onKilled.dispatch = function(){
         this.vent.emit('asteroid-killed', this);
     }.bind(this);
@@ -82,6 +91,7 @@ proto.create = function( typeVal, pos ) {
 
 
 proto.adjustVelocity = function(){
+    // @TODO maybe have a variant velocity that reacts to player movement?
     return this;
 };
 

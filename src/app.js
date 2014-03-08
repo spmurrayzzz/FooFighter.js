@@ -45,6 +45,7 @@ function preload(){
         lasers      = game.add.group(),
         hudGroup    = game.add.group();
 
+    // Keep group references so we can maintain a proper display index
     gameState.groups = {
         backGroup: backGroup,
         frontGroup: frontGroup,
@@ -53,6 +54,7 @@ function preload(){
         lasers: lasers
     };
 
+    // Grab keyboard references for keydown events
     gameState.cursors = game.input.keyboard.createCursorKeys();
     gameState.keyboard = game.input.keyboard;
 
@@ -63,6 +65,7 @@ function preload(){
         'assets/json/space-sheet.json'
     );
 
+    // Create discrete game objects/entities
     gameState.gameAI = new FooFighter.GameAI(gameState);
     entities.starsBackground = new FooFighter.StarsBackground(gameState, backGroup);
     entities.player = new FooFighter.Player(gameState, frontGroup);
@@ -75,15 +78,18 @@ function preload(){
  * @return {void}
  */
 function create(){
+    // This is only going to fire once
     gameState.vent.emit('create');
 
 }
 
 function update(){
+    // If we haven't kicked off game start yet, do so the first time
     if ( !gameConfig.hasStarted ) {
         gameState.vent.emit('start');
         gameConfig.hasStarted = true;
     }
+    // This is the primary game loop event
     gameState.vent.emit('update');
 }
 

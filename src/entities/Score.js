@@ -36,6 +36,8 @@ var proto = Score.prototype;
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('update', function(){
+        // On every game loop, change the display
+        // value of the current game score
         this.text.content = this.prefix + this.gameState.score;
     }.bind(this));
     return this;

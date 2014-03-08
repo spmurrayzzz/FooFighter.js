@@ -43,10 +43,13 @@ proto.create = function(){
         game = gs.game,
         stars;
 
+    // Add the solid background sprite entity
     this.group.add(
         game.add.tileSprite(0, 0, 800, 600, 'background')
     );
 
+    // In the same group, use our star tile png to create
+    // the starfield background
     stars = this.group;
     for (var x = -4; x < 4; x++) {
         for (var y = -3; y < 3; y++) {
@@ -59,7 +62,10 @@ proto.create = function(){
 
 proto.update = function(){
     var stars = this.group;
-    stars.y = stars.y > 768 ? 0: stars.y;
+
+    // This is a bit of a hack, we're just moving the background
+    // group along the Y axis and starting over when we go too far
+    stars.y = stars.y > 768 ? 0 : stars.y;
     stars.y += 4.0;
     return this;
 };
