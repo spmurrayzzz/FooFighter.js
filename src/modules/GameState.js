@@ -28,6 +28,11 @@ function GameState ( game ){
 var proto = GameState.prototype;
 
 
+proto.updateScore = function ( val ) {
+    this.score = Math.max(this.score + val, 0);
+};
+
+
 FooFighter.GameState = GameState;
 
 })(FooFighter);

@@ -121,6 +121,7 @@ proto.weaponHandler = function(){
         setTimeout(function(){
             this.canFire = true;
         }.bind(this), this.config.laser.fireTimer);
+        this.gameState.updateScore(-2);
     }
     return this;
 };

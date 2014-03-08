@@ -118,7 +118,7 @@ proto.collisionHandlerLaser = function ( asteroid, laser ) {
 
     asteroid.kill();
     laser.kill();
-    this.gameState.score += points[asteroid.currentFrame.name];
+    this.gameState.updateScore(points[asteroid.currentFrame.name]);
 };
 
 
