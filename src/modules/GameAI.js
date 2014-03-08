@@ -21,7 +21,7 @@ function GameAI ( gameState ){
     this.lastEnemyCreated = d.getTime();
     this.config = {
         enemyThrottleVal: 1000,
-        bigToSmallPercentage: 0.7,
+        bigToSmallPercentage: 0.6,
         points: {
             'meteorBig.png': 5,
             'meteorSmall.png': 10
