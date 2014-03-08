@@ -35,9 +35,11 @@ var proto = GameAI.prototype;
 
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
+
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
     vent.on('update', this.addEnemiesCheck.bind(this));
+    vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
     return this;
 };
 
@@ -58,6 +60,7 @@ proto.addEnemiesCheck = function(){
     var throttleVal = this.config.enemyThrottleVal,
         lastTime = this.lastEnemyCreated,
         currTime = new Date().getTime();
+
     if ( this.gameInProgress === true) {
         if ( currTime - lastTime >= throttleVal ) {
             this.createAsteroid();
@@ -92,12 +95,25 @@ proto.checkCollisions = function(){
 };
 
 
-proto.collisionHandler = function( asteroid, laser ) {
+proto.collisionHandler = function ( asteroid, laser ) {
     var points = this.config.points;
+
     asteroid.kill();
     laser.kill();
     this.gameState.score += points[asteroid.currentFrame.name];
     return this;
+};
+
+
+proto.asteroidExplosion = function ( asteroid ) {
+    var type = asteroid.sprite.currentFrame.name,
+        posX = asteroid.sprite.x,
+        posY = asteroid.sprite.y,
+        i;
+
+    for (i = 0; i < 3; i++) {
+        this.createAsteroid();
+    }
 };
 
 

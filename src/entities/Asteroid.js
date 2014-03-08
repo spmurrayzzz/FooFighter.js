@@ -67,7 +67,7 @@ proto.create = function( typeVal ) {
     this.sprite.body.velocity.x = xVelocity * modifier;
 
     this.sprite.events.onKilled.dispatch = function(){
-        this.vent.emit('asteroid-expired', this.id);
+        this.vent.emit('asteroid-killed', this);
     }.bind(this);
 
     return this;
