@@ -43,6 +43,7 @@ proto.bindEvents = function(){
         this.movementHandler();
         this.weaponHandler();
     }.bind(this));
+    return this;
 };
 
 
@@ -57,6 +58,7 @@ proto.create = function(){
         y: 0.5
     };
     this.group.add(this.sprite);
+    return this;
 };
 
 
@@ -88,6 +90,7 @@ proto.movementHandler = function(){
     }
 
     this.sprite.body.velocity[axis] = (modifier * magnitude);
+    return this;
 };
 
 
@@ -108,6 +111,7 @@ proto.weaponHandler = function(){
             this.canFire = true;
         }.bind(this), this.config.laser.fireTimer);
     }
+    return this;
 };
 
 
@@ -128,6 +132,7 @@ proto.createLaser = function(){
     };
     laser.body.velocity.y = velocity;
     laser.events.onOutOfBounds.add(laser.kill, laser);
+    return this;
 };
 
 

@@ -34,6 +34,7 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
     vent.on('update', this.update.bind(this));
+    return this;
 };
 
 
@@ -52,6 +53,7 @@ proto.create = function(){
             stars.create(x*254, y*256, 'starBackground');
         }
     };
+    return this;
 };
 
 
@@ -59,6 +61,7 @@ proto.update = function(){
     var stars = this.group;
     stars.y = stars.y > 768 ? 0: stars.y;
     stars.y += 4.0;
+    return this;
 };
 
 

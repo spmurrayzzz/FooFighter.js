@@ -33,16 +33,19 @@ proto.bindEvents = function(){
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
     vent.on('update', this.addEnemiesCheck.bind(this));
+    return this;
 };
 
 
 proto.start = function(){
     this.gameInProgress = true;
+    return this;
 };
 
 
 proto.stop = function(){
     this.gameInProgress = false;
+    return this;
 };
 
 
@@ -56,6 +59,7 @@ proto.addEnemiesCheck = function(){
             this.lastEnemyCreated = currTime;
         }
     }
+    return this;
 };
 
 
@@ -65,6 +69,7 @@ proto.createAsteroid = function(){
 
     newRoid = new FooFighter.Asteroid(this.gameState).create();
     asteroids.add(newRoid.sprite);
+    return this;
 };
 
 
@@ -72,6 +77,7 @@ proto.checkCollisions = function(){
     this.game.physics.overlap(
         this.asteroids, this.lasers, this.collisionHandler, null, this
     );
+    return this;
 };
 
 
@@ -79,6 +85,7 @@ proto.collisionHandler = function( asteroid, laser ) {
     asteroid.kill();
     laser.kill();
     this.gameState.score += 10;
+    return this;
 };
 
 

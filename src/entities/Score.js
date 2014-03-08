@@ -38,6 +38,7 @@ proto.bindEvents = function(){
     vent.on('update', function(){
         this.text.content = this.prefix + this.gameState.score;
     }.bind(this));
+    return this;
 };
 
 
