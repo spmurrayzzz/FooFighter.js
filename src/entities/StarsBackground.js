@@ -19,11 +19,21 @@ function StarsBackground ( gameState, group ) {
         'background',
         'assets/img/background.png'
     );
+    this.gameState.game.load.image(
+        'speedLine',
+        'assets/img/speedLine.png'
+    );
     // Star tile
     this.gameState.game.load.image(
         'starBackground',
         'assets/img/starBackground.png'
     );
+    this.config = {
+        starThrottle: {
+            time: 250
+        }
+    };
+    this.shouldAddStar = true;
     this.bindEvents();
 }
 
@@ -34,6 +44,7 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
     vent.on('update', this.moveField.bind(this));
+    vent.on('update', this.addBackgroundStar.bind(this));
     return this;
 };
 
@@ -69,6 +80,31 @@ proto.moveField = function(){
     stars.y += 4.0;
 
     return this;
+};
+
+
+proto.addBackgroundStar = function(){
+    var throttleVal = this.config.starThrottle.time,
+        game = this.gameState.game,
+        gameState = this.gameState,
+        star;
+
+    if ( this.shouldAddStar ) {
+        star = game.add.sprite(
+            game.world.width * Math.random(),
+            -100,
+            'speedLine'
+        );
+        star.alpha = 0.2;
+        star.events.onOutOfBounds.add(star.kill, star);
+        star.body.velocity.y = 800;
+        this.shouldAddStar = false;
+        setTimeout(function(){
+            this.shouldAddStar = true;
+        }.bind(this), throttleVal);
+    }
+
+    return star;
 };
 
 
