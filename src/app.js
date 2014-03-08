@@ -8,7 +8,7 @@
  * (via Shout object).
  */
 
-;(function( FooFighter ){
+;(function( FooFighter, Phaser ){
 
 'use strict';
 
@@ -101,4 +101,4 @@ function update(){
 }
 
 
-})(FooFighter);
+})(FooFighter, Phaser);
