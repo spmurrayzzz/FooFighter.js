@@ -34,6 +34,28 @@ module.exports = function(grunt) {
         dest: 'dist/FooFighter.js'
       }
     },
+    concat_sourcemap: {
+      options: {
+        sourcesContent: true
+      },
+      target: {
+        files: {
+          'dist/FooFighter.js': [
+              'src/namespace.js',
+              'src/modules/Util.js',
+              'src/vendor/Shout.js',
+              'src/modules/GameState.js',
+              'src/modules/GameAI.js',
+              'src/entities/Score.js',
+              'src/entities/Timer.js',
+              'src/entities/StarField.js',
+              'src/entities/Player.js',
+              'src/entities/Asteroid.js',
+              'src/app.js'
+          ]
+        }
+      }
+    },
     uglify: {
       options: {
         banner: '<%= banner %>',
@@ -95,12 +117,13 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-concat-sourcemap');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'concat_sourcemap', 'uglify']);
 
 };
