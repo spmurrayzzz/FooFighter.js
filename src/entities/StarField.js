@@ -1,7 +1,7 @@
 /**
- * StarsBackground.js
+ * StarField.js
  *
- * FooFighter.js — StarsBackground entity
+ * FooFighter.js — StarField entity
  *
  * This class represents the display object that renders the moving
  * starfield background in the game world.
@@ -11,7 +11,7 @@
 
 'use strict';
 
-function StarsBackground ( gameState, group ) {
+function StarField ( gameState, group ) {
     this.gameState = gameState;
     this.group = group;
     // Background
@@ -41,7 +41,7 @@ function StarsBackground ( gameState, group ) {
     this.bindEvents();
 }
 
-var proto = StarsBackground.prototype;
+var proto = StarField.prototype;
 
 
 proto.bindEvents = function(){
@@ -113,6 +113,6 @@ proto.addBackgroundStar = function(){
 };
 
 
-FooFighter.StarsBackground = StarsBackground;
+FooFighter.StarField = StarField;
 
 })(FooFighter);

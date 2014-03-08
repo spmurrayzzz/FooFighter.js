@@ -26,7 +26,7 @@ module.exports = function(grunt) {
           'src/modules/GameAI.js',
           'src/entities/Score.js',
           'src/entities/Timer.js',
-          'src/entities/StarsBackground.js',
+          'src/entities/StarField.js',
           'src/entities/Player.js',
           'src/entities/Asteroid.js',
           'src/app.js'
