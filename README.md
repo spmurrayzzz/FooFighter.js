@@ -2,7 +2,7 @@
 
 An experiment in making a really crappy starfighter game.
 
-Demo: [foofighterjs.com/](http://foofighterjs.com/)
+Demo: [foofighterjs.com](http://foofighterjs.com/)
 
 ## Install
 
