@@ -15,7 +15,6 @@ function Asteroid ( gameState, group ) {
     this.vent = gameState.vent;
     this.group = group;
     this.sprite = {};
-    this.id = guid();
     this.velocityRange = {
         min: 50,
         max: 250
@@ -38,6 +37,7 @@ proto.create = function(){
         player = this.gameState.entities.player,
         minVelocity = this.velocityRange.min,
         maxVelocity = this.velocityRange.max,
+        randInRange = FooFighter.Util.randInRange,
         modifier, xVelocity;
 
     this.sprite = game.add.sprite(
