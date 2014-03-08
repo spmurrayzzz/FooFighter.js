@@ -16,6 +16,10 @@ function Asteroid ( gameState, group ) {
     this.group = group;
     this.sprite = {};
     this.id = guid();
+    this.velocityRange = {
+        min: 50,
+        max: 250
+    };
     this.bindEvents();
 }
 
@@ -31,6 +35,8 @@ proto.create = function(){
     var game = this.gameState.game,
         targetX = game.world.width * Math.random(),
         player = this.gameState.entities.player,
+        minVelocity = this.velocityRange.min,
+        maxVelocity = this.velocityRange.max,
         modifier, xVelocity;
 
     this.sprite = game.add.sprite(
@@ -41,7 +47,7 @@ proto.create = function(){
         y: 0.5
     };
     this.sprite.events.onOutOfBounds.add(this.sprite.kill);
-    this.sprite.body.velocity.y = Math.random() * (250 - 50) + 50;
+    this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
 
     xVelocity = 10;
     if ( targetX > player.sprite.x ) {

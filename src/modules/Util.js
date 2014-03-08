@@ -5,3 +5,7 @@ function guid() {
         return v.toString(16);
     });
 }
+
+function randInRange(min, max) {
+    return Math.random() * (max - min) + min;
+}
