@@ -48,7 +48,7 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
     vent.on('update', this.moveField.bind(this));
-    vent.on('update', this.addBackgroundStar.bind(this));
+    vent.on('update', this.addSpeedLine.bind(this));
     return this;
 };
 
@@ -87,7 +87,7 @@ proto.moveField = function(){
 };
 
 
-proto.addBackgroundStar = function(){
+proto.addSpeedLine = function(){
     var throttleVal = this.config.starThrottle.time,
         field = this.config.field,
         game = this.gameState.game,
