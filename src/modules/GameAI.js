@@ -27,9 +27,9 @@ function GameAI ( gameState ){
             'meteorSmall.png': 10
         },
         explosionVelocites: [
-            -100,
-            0,
-            100
+            -200,
+            100,
+            200
         ]
     };
     this.bindEvents();
