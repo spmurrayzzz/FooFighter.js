@@ -67,6 +67,7 @@ function preload(){
         'assets/json/space-sheet.json'
     );
 
+    // Set scale mode to strech to browser window, but preserve aspect ratio
     game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
     game.stage.scale.setShowAll();
     game.stage.scale.refresh();
