@@ -67,6 +67,10 @@ function preload(){
         'assets/json/space-sheet.json'
     );
 
+    game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
+    game.stage.scale.setShowAll();
+    game.stage.scale.refresh();
+
     // Create discrete game objects/entities
     gameState.gameAI = new FooFighter.GameAI(gameState);
     entities.starField = new FooFighter.StarField(gameState, backGroup);
