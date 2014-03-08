@@ -115,6 +115,7 @@ proto.addSpeedLine = function(){
     return line;
 };
 
+
 proto.addStar = function(){
     var throttleVal = this.config.field.starThrottle,
         field = this.config.field,
