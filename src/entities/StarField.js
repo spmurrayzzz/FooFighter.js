@@ -30,12 +30,12 @@ function StarField ( gameState, group ) {
     );
     this.config = {
         field: {
-            lineSpeed: 1000,
-            starSpeed: 800,
+            lineSpeed: 2000,
+            starSpeed: 1600,
             lineOpacity: 0.11,
             starOpacity: 0.5,
-            lineThrottle: 250,
-            starThrottle: 25
+            lineThrottle: 100,
+            starThrottle: 10
         }
     };
     this.shouldAddStar = true;
@@ -62,12 +62,14 @@ proto.create = function(){
         stars,
         tile;
 
+
     // Add the solid background sprite entity
-    this.gameState.groups.background.add(
-        game.add.tileSprite(
-            0, 0, game.world.width, game.world.height, 'background'
-        )
-    );
+    // this.gameState.groups.background.add(
+    //     game.add.tileSprite(
+    //         0, 0, game.world.width, game.world.height, 'background'
+    //     )
+    // );
+    // Commenting this out for now, kind of like the darker game world
 
     // In another group, use our star tile png to create
     // the starfield background
