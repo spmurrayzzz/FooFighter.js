@@ -33,10 +33,10 @@ function StarField ( gameState, group ) {
     );
     this.config = {
         field: {
-            lineSpeed: 1000,
+            lineSpeed: 800,
             starSpeed: 500,
-            lineOpacity: 0.11,
-            starOpacity: 0.3,
+            lineOpacity: 0.08,
+            starOpacity: 0.15,
             lineThrottle: 100,
             starThrottle: 10
         }
@@ -57,8 +57,6 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
     vent.on('update', this.moveField.bind(this));
-    // vent.on('update', this.addSpeedLine.bind(this));
-    // vent.on('update', this.addStar.bind(this));
     return this;
 };
 
@@ -88,8 +86,8 @@ proto.create = function(){
         }
     };
 
-    this.game.time.events.loop(100, this.addSpeedLine.bind(this), this);
-    this.game.time.events.loop(10, this.addStar.bind(this), this);
+    this.game.time.events.repeat(100, 10, this.addSpeedLine.bind(this), this);
+    this.game.time.events.repeat(10, 100, this.addStar.bind(this), this);
 
     return this;
 };
@@ -109,15 +107,19 @@ proto.moveField = function(){
 
 proto.addSpeedLine = function(){
     var field = this.config.field,
+        game = this.game,
         line;
 
     line = this.game.add.sprite(
-        this.game.world.width * Math.random(),
+        game.world.width * Math.random(),
         -100,
         'speedLine'
     );
     line.alpha = field.lineOpacity;
-    line.events.onOutOfBounds.add(line.kill, line);
+    line.events.onOutOfBounds.add(function(){
+        this.y = -100;
+        this.x = game.world.width * Math.random();
+    }, line);
     line.body.velocity.y = field.lineSpeed;
 
     return line;
@@ -127,19 +129,23 @@ proto.addSpeedLine = function(){
 proto.addStar = function(){
     var field = this.config.field,
         starType = 'Background/starSmall.png',
+        game = this.game,
         star;
 
     if ( Math.random() >= 0.9 ) {
         starType = 'Background/starBig.png'
     }
     star = this.game.add.sprite(
-        this.game.world.width * Math.random(),
+        game.world.width * Math.random(),
         0,
         'sprites',
         starType
     );
     star.alpha = field.starOpacity;
-    star.events.onOutOfBounds.add(star.kill, star);
+    star.events.onOutOfBounds.add(function(){
+        this.y = 0;
+        this.x = game.world.width * Math.random();
+    }, star);
     star.body.velocity.y = field.starSpeed;
 
     return star;
