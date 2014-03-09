@@ -23,6 +23,7 @@ module.exports = function(grunt) {
               'src/vendor/Shout.js',
               'src/modules/GameState.js',
               'src/modules/GameEngine.js',
+              'src/modules/StartScreen.js',
               'src/entities/Score.js',
               'src/entities/Timer.js',
               'src/entities/StarField.js',

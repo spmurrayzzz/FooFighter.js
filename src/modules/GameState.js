@@ -23,6 +23,8 @@ function GameState ( game ){
     this.keyMap = {};
     this.score = 0;
     this.cursors = {};
+    this.modules = {};
+    this.hasStarted = false;
 }
 
 var proto = GameState.prototype;

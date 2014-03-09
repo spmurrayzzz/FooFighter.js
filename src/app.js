@@ -39,6 +39,7 @@ var gameConfig = {
  */
 function preload(){
     var entities    = gameState.entities,
+        modules     = gameState.modules,
         background  = game.add.group(),
         backGroup   = game.add.group(),
         frontGroup  = game.add.group(),
@@ -76,6 +77,7 @@ function preload(){
 
     // Create discrete game objects/entities
     gameState.gameEngine = new FooFighter.GameEngine(gameState);
+    modules.startScreen = new FooFighter.StartScreen(gameState, hudGroup);
     entities.starField = new FooFighter.StarField(gameState, backGroup);
     entities.player = new FooFighter.Player(gameState, frontGroup);
     entities.score = new FooFighter.Score(gameState, hudGroup);
@@ -93,12 +95,6 @@ function create(){
 }
 
 function update(){
-    // If we haven't kicked off game start yet, do so the first time
-    if ( !gameConfig.hasStarted ) {
-        gameState.vent.emit('start');
-        gameConfig.hasStarted = true;
-    }
-    // This is the primary game loop event
     gameState.vent.emit('update');
 }
 
