@@ -38,7 +38,10 @@ function StarField ( gameState, group ) {
             lineOpacity: 0.08,
             starOpacity: 0.15,
             lineThrottle: 100,
-            starThrottle: 10
+            starThrottle: 10,
+            numLines: 6,
+            numStars: 100,
+            velocityVariance: 0.5
         }
     };
     this.shouldAddStar = true;
@@ -63,6 +66,7 @@ proto.bindEvents = function(){
 
 proto.create = function(){
     var gs = this.gameState,
+        config = this.config,
         game = gs.game,
         stars,
         tile;
@@ -86,8 +90,18 @@ proto.create = function(){
         }
     };
 
-    this.game.time.events.repeat(100, 10, this.addSpeedLine.bind(this), this);
-    this.game.time.events.repeat(10, 100, this.addStar.bind(this), this);
+    this.game.time.events.repeat(
+        config.field.lineThrottle,
+        config.field.numLines,
+        this.addSpeedLine.bind(this),
+        this
+    );
+    this.game.time.events.repeat(
+        config.field.starThrottle,
+        config.field.numStars,
+        this.addStar.bind(this),
+        this
+    );
 
     return this;
 };
@@ -109,6 +123,7 @@ proto.addSpeedLine = function(){
     var field = this.config.field,
         randInRange = FooFighter.Util.randInRange,
         game = this.game,
+        variance = this.config.field.velocityVariance,
         line;
 
     line = this.game.add.sprite(
@@ -121,7 +136,9 @@ proto.addSpeedLine = function(){
         this.y = -100;
         this.x = game.world.width * Math.random();
     }, line);
-    line.body.velocity.y = randInRange(field.lineSpeed*0.8, field.lineSpeed);
+    line.body.velocity.y = randInRange(
+        field.lineSpeed * 0.5, field.lineSpeed
+    );
 
     return line;
 };
@@ -131,6 +148,7 @@ proto.addStar = function(){
     var field = this.config.field,
         randInRange = FooFighter.Util.randInRange,
         starType = 'Background/starSmall.png',
+        variance = this.config.field.velocityVariance,
         game = this.game,
         star;
 
@@ -148,7 +166,9 @@ proto.addStar = function(){
         this.y = 0;
         this.x = game.world.width * Math.random();
     }, star);
-    star.body.velocity.y = randInRange(field.starSpeed*0.8, field.starSpeed);
+    star.body.velocity.y = randInRange(
+        field.starSpeed * variance, field.starSpeed
+    );
 
     return star;
 };
