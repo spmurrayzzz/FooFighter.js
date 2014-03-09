@@ -127,14 +127,18 @@ proto.addStar = function(){
         field = this.config.field,
         game = this.gameState.game,
         gameState = this.gameState,
+        starType = 'Background/starSmall.png',
         star;
 
     if ( this.shouldAddStar ) {
+        if ( Math.random() >= 0.9 ) {
+            starType = 'Background/starBig.png'
+        }
         star = game.add.sprite(
             game.world.width * Math.random(),
             0,
             'sprites',
-            'Background/starSmall.png'
+            starType
         );
         star.alpha = field.starOpacity;
         star.events.onOutOfBounds.add(star.kill, star);
