@@ -20,7 +20,7 @@ function GameAI ( gameState ){
     this.gameInProgress = false;
     this.lastEnemyCreated = d.getTime();
     this.config = {
-        enemyThrottleVal: 1000,
+        enemyThrottleVal: 500,
         bigToSmallPercentage: 0.6,
         points: {
             'meteorBig.png': 5,
