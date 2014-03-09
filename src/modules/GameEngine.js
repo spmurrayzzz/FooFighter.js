@@ -1,7 +1,7 @@
 /**
- * GameAI.js
+ * GameEngine.js
  *
- * FooFighter.js — GameAI module
+ * FooFighter.js — GameEngine module
  *
  * This module controls the generation of enemy entities, collision detection,
  * and overall game engine goodness.
