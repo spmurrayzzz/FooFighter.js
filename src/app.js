@@ -73,7 +73,7 @@ function preload(){
     game.stage.scale.refresh();
 
     // Create discrete game objects/entities
-    gameState.gameAI = new FooFighter.GameAI(gameState);
+    gameState.gameEngine = new FooFighter.GameEngine(gameState);
     entities.starField = new FooFighter.StarField(gameState, backGroup);
     entities.player = new FooFighter.Player(gameState, frontGroup);
     entities.score = new FooFighter.Score(gameState, hudGroup);

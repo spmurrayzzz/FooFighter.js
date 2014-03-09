@@ -11,7 +11,7 @@
 
 'use strict';
 
-function GameAI ( gameState ){
+function GameEngine ( gameState ){
     var d = new Date();
     this.gameState = gameState;
     this.game = gameState.game;
@@ -35,7 +35,7 @@ function GameAI ( gameState ){
     this.bindEvents();
 }
 
-var proto = GameAI.prototype;
+var proto = GameEngine.prototype;
 
 
 proto.bindEvents = function(){
@@ -151,6 +151,6 @@ proto.asteroidExplosion = function ( asteroid ) {
 };
 
 
-FooFighter.GameAI = GameAI;
+FooFighter.GameEngine = GameEngine;
 
 })(FooFighter);

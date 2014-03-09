@@ -11,29 +11,6 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
-      dist: {
-        src: [
-          // 'bower_components/phaser/phaser.js',
-          'src/namespace.js',
-          'src/modules/Util.js',
-          'src/vendor/Shout.js',
-          'src/modules/GameState.js',
-          'src/modules/GameAI.js',
-          'src/entities/Score.js',
-          'src/entities/Timer.js',
-          'src/entities/StarField.js',
-          'src/entities/Player.js',
-          'src/entities/Asteroid.js',
-          'src/app.js'
-        ],
-        dest: 'dist/FooFighter.js'
-      }
-    },
     concat_sourcemap: {
       options: {
         sourcesContent: true
@@ -45,7 +22,7 @@ module.exports = function(grunt) {
               'src/modules/Util.js',
               'src/vendor/Shout.js',
               'src/modules/GameState.js',
-              'src/modules/GameAI.js',
+              'src/modules/GameEngine.js',
               'src/entities/Score.js',
               'src/entities/Timer.js',
               'src/entities/StarField.js',
@@ -64,7 +41,7 @@ module.exports = function(grunt) {
         sourceMapPrefix: 1
       },
       dist: {
-        src: '<%= concat.dist.dest %>',
+        src: 'dist/FooFighter.js',
         dest: 'dist/FooFighter.min.js'
       }
     },
