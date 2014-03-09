@@ -107,6 +107,7 @@ proto.moveField = function(){
 
 proto.addSpeedLine = function(){
     var field = this.config.field,
+        randInRange = FooFighter.Util.randInRange,
         game = this.game,
         line;
 
@@ -120,7 +121,7 @@ proto.addSpeedLine = function(){
         this.y = -100;
         this.x = game.world.width * Math.random();
     }, line);
-    line.body.velocity.y = field.lineSpeed;
+    line.body.velocity.y = randInRange(field.lineSpeed*0.8, field.lineSpeed);
 
     return line;
 };
@@ -128,6 +129,7 @@ proto.addSpeedLine = function(){
 
 proto.addStar = function(){
     var field = this.config.field,
+        randInRange = FooFighter.Util.randInRange,
         starType = 'Background/starSmall.png',
         game = this.game,
         star;
@@ -146,7 +148,7 @@ proto.addStar = function(){
         this.y = 0;
         this.x = game.world.width * Math.random();
     }, star);
-    star.body.velocity.y = field.starSpeed;
+    star.body.velocity.y = randInRange(field.starSpeed*0.8, field.starSpeed);
 
     return star;
 };
