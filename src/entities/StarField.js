@@ -15,6 +15,7 @@ function StarField ( gameState, group ) {
     var d = new Date();
 
     this.gameState = gameState;
+    this.game = gameState.game;
     this.group = group;
     // Background
     this.gameState.game.load.image(
@@ -56,8 +57,8 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
     vent.on('create', this.create.bind(this));
     vent.on('update', this.moveField.bind(this));
-    vent.on('update', this.addSpeedLine.bind(this));
-    vent.on('update', this.addStar.bind(this));
+    // vent.on('update', this.addSpeedLine.bind(this));
+    // vent.on('update', this.addStar.bind(this));
     return this;
 };
 
@@ -86,6 +87,10 @@ proto.create = function(){
             tile.alpha = 0.35;
         }
     };
+
+    this.game.time.events.loop(100, this.addSpeedLine.bind(this), this);
+    this.game.time.events.loop(10, this.addStar.bind(this), this);
+
     return this;
 };
 
@@ -103,55 +108,39 @@ proto.moveField = function(){
 
 
 proto.addSpeedLine = function(){
-    var throttleVal = this.config.field.lineThrottle,
-        field = this.config.field,
-        game = this.gameState.game,
-        gameState = this.gameState,
-        lastCreated = this.lastCreated,
-        currTime = new Date().getTime(),
+    var field = this.config.field,
         line;
 
-    if ( currTime - lastCreated.line >= throttleVal ) {
-        line = game.add.sprite(
-            game.world.width * Math.random(),
-            -100,
-            'speedLine'
-        );
-        line.alpha = field.lineOpacity;
-        line.events.onOutOfBounds.add(line.kill, line);
-        line.body.velocity.y = field.lineSpeed;
-        lastCreated.line = currTime;
-    }
+    line = this.game.add.sprite(
+        this.game.world.width * Math.random(),
+        -100,
+        'speedLine'
+    );
+    line.alpha = field.lineOpacity;
+    line.events.onOutOfBounds.add(line.kill, line);
+    line.body.velocity.y = field.lineSpeed;
 
     return line;
 };
 
 
 proto.addStar = function(){
-    var throttleVal = this.config.field.starThrottle,
-        field = this.config.field,
-        game = this.gameState.game,
-        gameState = this.gameState,
+    var field = this.config.field,
         starType = 'Background/starSmall.png',
-        lastCreated = this.lastCreated,
-        currTime = new Date().getTime(),
         star;
 
-    if ( currTime - lastCreated.line >= throttleVal ) {
-        if ( Math.random() >= 0.9 ) {
-            starType = 'Background/starBig.png'
-        }
-        star = game.add.sprite(
-            game.world.width * Math.random(),
-            0,
-            'sprites',
-            starType
-        );
-        star.alpha = field.starOpacity;
-        star.events.onOutOfBounds.add(star.kill, star);
-        star.body.velocity.y = field.starSpeed;
-        lastCreated.start = currTime;
+    if ( Math.random() >= 0.9 ) {
+        starType = 'Background/starBig.png'
     }
+    star = this.game.add.sprite(
+        this.game.world.width * Math.random(),
+        0,
+        'sprites',
+        starType
+    );
+    star.alpha = field.starOpacity;
+    star.events.onOutOfBounds.add(star.kill, star);
+    star.body.velocity.y = field.starSpeed;
 
     return star;
 };
