@@ -30,10 +30,10 @@ function StarField ( gameState, group ) {
     );
     this.config = {
         field: {
-            lineSpeed: 2000,
-            starSpeed: 1600,
+            lineSpeed: 1000,
+            starSpeed: 500,
             lineOpacity: 0.11,
-            starOpacity: 0.5,
+            starOpacity: 0.3,
             lineThrottle: 100,
             starThrottle: 10
         }
