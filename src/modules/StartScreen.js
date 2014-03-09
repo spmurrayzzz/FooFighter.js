@@ -24,6 +24,7 @@ function StartScreen ( gameState, group ) {
             align: "center"
         }
     };
+    this.refs = {};
     this.title = 'FooFighter.js';
     this.gameOver = 'Game Over';
     this.bindEvents();
@@ -35,8 +36,12 @@ var proto = StartScreen.prototype;
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
+    // Need to keep a reference for the bound function
+    // so we can unbind the handler later
+    this.refs.checkStart = this.checkStart.bind(this);
+    vent.on('update', this.refs.checkStart);
+
     vent.on('create', this.create.bind(this));
-    vent.on('update', this.checkStart.bind(this));
     vent.on('start', this.hideTitle.bind(this));
     vent.on('game-over', this.showGameOver.bind(this));
     return this;
@@ -76,12 +81,9 @@ proto.checkStart = function(){
     var kb = this.gameState.keyboard,
         vent = this.gameState.vent;
 
-    if ( this.gameState.hasStarted ) {
-        return false;
-    }
-
     if ( kb.isDown(83) ) {
         vent.emit('start');
+        vent.off('update', this.refs.checkStart);
         this.gameState.hasStarted = true;
     }
 };
