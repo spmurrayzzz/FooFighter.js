@@ -17,9 +17,15 @@ function StartScreen ( gameState, group ) {
             font: "32px KenPixel",
             fill: "#ffff00",
             align: "center"
+        },
+        gameOver: {
+            font: "100px KenPixel",
+            fill: "#ffff00",
+            align: "center"
         }
     };
     this.title = 'FooFighter.js';
+    this.gameOver = 'Game Over';
     this.bindEvents();
 }
 
@@ -31,7 +37,8 @@ proto.bindEvents = function(){
 
     vent.on('create', this.create.bind(this));
     vent.on('update', this.checkStart.bind(this));
-    vent.on('start', this.hideScreen.bind(this));
+    vent.on('start', this.hideTitle.bind(this));
+    vent.on('game-over', this.showGameOver.bind(this));
     return this;
 };
 
@@ -80,9 +87,29 @@ proto.checkStart = function(){
 };
 
 
-proto.hideScreen = function(){
+proto.hideTitle = function(){
     this.startText.visible = false;
     this.titleText.visible = false;
+};
+
+
+proto.showGameOver = function(){
+    var game = this.game,
+        isUndefined = FooFighter.Util.isUndefined;
+
+    if ( isUndefined(this.gameOverText) ) {
+        this.gameOverText =this.game.add.bitmapText(
+            this.game.world.centerX, this.game.world.centerY,
+            this.gameOver,
+            this.styles.title
+        );
+        this.gameOverText.anchor = {
+            x: 0.5,
+            y: 0.5
+        };
+    } else {
+        this.gameOverText.visible = true;
+    }
 };
 
 

@@ -63,6 +63,7 @@ proto.create = function(){
     };
     // Add it to the correct display group
     this.group.add(this.sprite);
+    this.sprite.events.onKilled.add(this.onKill.bind(this));
     return this;
 };
 
@@ -153,6 +154,13 @@ proto.createLaser = function(){
     // Clean up any lasers that leave the game scence
     laser.events.onOutOfBounds.add(laser.kill, laser);
     return this;
+};
+
+
+proto.onKill = function(){
+    var vent = this.gameState.vent;
+
+    vent.emit('game-over');
 };
 
 
