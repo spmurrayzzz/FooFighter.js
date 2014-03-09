@@ -17,16 +17,11 @@ function Score ( gameState, group ) {
     this.group = group;
     this.text = {};
     this.prefix = 'Score: '
-    this.text = this.game.add.text(
-        this.game.world.width - 25, 10,
-        this.prefix + gameState.score,
-        { font: "25px Helvetica", fill: "#ffff00", align: "center" }
-    );
-    this.text.anchor = {
-        x: 1,
-        y: 0
+    this.style = {
+        font: "25px KenPixel",
+        fill: "#ffff00",
+        align: "center"
     };
-    this.group.add(this.text);
     this.bindEvents();
 }
 
@@ -35,11 +30,27 @@ var proto = Score.prototype;
 
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
+    vent.on('create', this.create.bind(this));
     vent.on('update', function(){
         // On every game loop, change the display
         // value of the current game score
-        this.text.content = this.prefix + this.gameState.score;
+        this.text.setText(this.prefix + this.gameState.score);
     }.bind(this));
+    return this;
+};
+
+
+proto.create = function(){
+    this.text = this.game.add.bitmapText(
+        this.game.world.width - 25, 10,
+        this.prefix + this.gameState.score,
+        this.style
+    );
+    this.text.anchor = {
+        x: 1,
+        y: 0
+    };
+    this.group.add(this.text);
     return this;
 };
 
