@@ -56,7 +56,7 @@ function preload(){
         lasers: lasers
     };
 
-    game.load.bitmapFont('KenPixel', 'assets/fonts/kenpixel.png', 'assets/fonts/kenpixel.fnt');
+    game.load.bitmapFont('KenPixel', 'assets/fonts/KenPixel.png', 'assets/fonts/KenPixel.fnt');
 
     // Grab keyboard references for keydown events
     gameState.cursors = game.input.keyboard.createCursorKeys();
