@@ -132,13 +132,16 @@ proto.addSpeedLine = function(){
         'speedLine'
     );
     line.alpha = field.lineOpacity;
-    line.events.onOutOfBounds.add(function(){
-        this.y = -100;
-        this.x = game.world.width * Math.random();
-    }, line);
     line.body.velocity.y = randInRange(
         field.lineSpeed * 0.5, field.lineSpeed
     );
+    line.events.onOutOfBounds.add(function(){
+        this.y = -100;
+        this.x = game.world.width * Math.random();
+        this.body.velocity.y = randInRange(
+            field.lineSpeed * 0.5, field.lineSpeed
+        );
+    }, line);
 
     return line;
 };
@@ -162,13 +165,16 @@ proto.addStar = function(){
         starType
     );
     star.alpha = field.starOpacity;
-    star.events.onOutOfBounds.add(function(){
-        this.y = 0;
-        this.x = game.world.width * Math.random();
-    }, star);
     star.body.velocity.y = randInRange(
         field.starSpeed * variance, field.starSpeed
     );
+    star.events.onOutOfBounds.add(function(){
+        this.y = 0;
+        this.x = game.world.width * Math.random();
+        this.body.velocity.y = randInRange(
+            field.starSpeed * variance, field.starSpeed
+        );
+    }, star);
 
     return star;
 };
