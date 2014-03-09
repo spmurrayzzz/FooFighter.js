@@ -15,7 +15,7 @@ function Player ( gameState, group ) {
     this.gameState = gameState;
     this.config = {};
     this.sprite = {};
-    this.movementVelocity = 250;
+    this.movementVelocity = 300;
     this.displayStates = {
         neutral: 'player.png',
         left: 'playerLeft.png',
