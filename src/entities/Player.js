@@ -23,6 +23,7 @@ function Player ( gameState, group ) {
     };
     this.fireTimer = 250;
     this.canFire = true;
+    this.lastFired = new Date().getTime();
     this.group = group;
     this.config.laser = {
         velocity: -500,
@@ -106,22 +107,24 @@ proto.weaponHandler = function(){
     var game = this.gameState.game,
         cursors = this.gameState.cursors,
         keyboard = this.gameState.keyboard,
+        currTime = new Date().getTime(),
+        lastFired = this.lastFired,
+        throttleVal = this.config.laser.fireTimer,
         laser;
 
-    // If we're throttled or dead, don't fire a got damn laser
-    if ( !this.canFire || !this.sprite.alive ) {
+    // If we're dead, don't fire a got damn laser
+    if ( !this.sprite.alive ) {
         return false;
     }
 
     // If spacebar is pressed in this loop step, create a laser and
     // make sure we can't fire again for N milliseconds
     if ( keyboard.isDown(Phaser.Keyboard.SPACEBAR) ) {
-        this.createLaser();
-        this.canFire = false;
-        setTimeout(function(){
-            this.canFire = true;
-        }.bind(this), this.config.laser.fireTimer);
-        this.gameState.updateScore(-2);
+        if ( currTime - lastFired >= throttleVal ) {
+            this.createLaser();
+            this.gameState.updateScore(-2);
+            this.lastFired = currTime;
+        }
     }
     return this;
 };

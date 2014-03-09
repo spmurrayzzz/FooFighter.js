@@ -12,6 +12,8 @@
 'use strict';
 
 function StarField ( gameState, group ) {
+    var d = new Date();
+
     this.gameState = gameState;
     this.group = group;
     // Background
@@ -40,6 +42,10 @@ function StarField ( gameState, group ) {
     };
     this.shouldAddStar = true;
     this.shouldAddSpeedLine = true;
+    this.lastCreated = {
+        line: d.getTime(),
+        star: d.getTime()
+    };
     this.bindEvents();
 }
 
@@ -101,9 +107,11 @@ proto.addSpeedLine = function(){
         field = this.config.field,
         game = this.gameState.game,
         gameState = this.gameState,
+        lastCreated = this.lastCreated,
+        currTime = new Date().getTime(),
         line;
 
-    if ( this.shouldAddSpeedLine ) {
+    if ( currTime - lastCreated.line >= throttleVal ) {
         line = game.add.sprite(
             game.world.width * Math.random(),
             -100,
@@ -112,10 +120,7 @@ proto.addSpeedLine = function(){
         line.alpha = field.lineOpacity;
         line.events.onOutOfBounds.add(line.kill, line);
         line.body.velocity.y = field.lineSpeed;
-        this.shouldAddSpeedLine = false;
-        setTimeout(function(){
-            this.shouldAddSpeedLine = true;
-        }.bind(this), throttleVal);
+        lastCreated.line = currTime;
     }
 
     return line;
@@ -128,9 +133,11 @@ proto.addStar = function(){
         game = this.gameState.game,
         gameState = this.gameState,
         starType = 'Background/starSmall.png',
+        lastCreated = this.lastCreated,
+        currTime = new Date().getTime(),
         star;
 
-    if ( this.shouldAddStar ) {
+    if ( currTime - lastCreated.line >= throttleVal ) {
         if ( Math.random() >= 0.9 ) {
             starType = 'Background/starBig.png'
         }
@@ -143,10 +150,7 @@ proto.addStar = function(){
         star.alpha = field.starOpacity;
         star.events.onOutOfBounds.add(star.kill, star);
         star.body.velocity.y = field.starSpeed;
-        this.shouldAddStar = false;
-        setTimeout(function(){
-            this.shouldAddStar = true;
-        }.bind(this), throttleVal);
+        lastCreated.start = currTime;
     }
 
     return star;
