@@ -35,7 +35,7 @@ function StarField ( gameState, group ) {
             lineOpacity: 0.11,
             starOpacity: 0.5,
             lineThrottle: 250,
-            starThrottle: 50
+            starThrottle: 25
         }
     };
     this.shouldAddStar = true;
