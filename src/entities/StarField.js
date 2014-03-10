@@ -37,8 +37,8 @@ function StarField ( gameState, group ) {
             starSpeed: 500,
             lineOpacity: 0.08,
             starOpacity: 0.15,
-            lineThrottle: 100,
-            starThrottle: 10,
+            lineThrottle: 0,
+            starThrottle: 0,
             numLines: 6,
             numStars: 100,
             velocityVariance: 0.5
@@ -90,18 +90,12 @@ proto.create = function(){
         }
     };
 
-    this.game.time.events.repeat(
-        config.field.lineThrottle,
-        config.field.numLines,
-        this.addSpeedLine.bind(this),
-        this
-    );
-    this.game.time.events.repeat(
-        config.field.starThrottle,
-        config.field.numStars,
-        this.addStar.bind(this),
-        this
-    );
+    for (var i = config.field.numLines - 1; i >= 0; i--) {
+        this.addSpeedLine.call(this);
+    }
+    for (var i = config.field.numStars - 1; i >= 0; i--) {
+        this.addStar.call(this);
+    }
 
     return this;
 };
@@ -128,7 +122,7 @@ proto.addSpeedLine = function(){
 
     line = this.game.add.sprite(
         game.world.width * Math.random(),
-        -100,
+        game.world.height * Math.random(),
         'speedLine'
     );
     line.alpha = field.lineOpacity;
@@ -160,7 +154,7 @@ proto.addStar = function(){
     }
     star = this.game.add.sprite(
         game.world.width * Math.random(),
-        0,
+        game.world.height * Math.random(),
         'sprites',
         starType
     );
