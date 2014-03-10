@@ -1,7 +1,7 @@
 
 ;(function( FooFighter ){
 
-"use strict";
+'use strict';
 
 function StartScreen ( gameState, group ) {
     this.gameState = gameState;
@@ -22,11 +22,17 @@ function StartScreen ( gameState, group ) {
             font: "100px KenPixel",
             fill: "#ffff00",
             align: "center"
+        },
+        restart: {
+            font: "32px KenPixel",
+            fill: "#ffff00",
+            align: "center"
         }
     };
     this.refs = {};
     this.title = 'FooFighter.js';
     this.gameOver = 'Game Over';
+    this.restart = 'Press \'P\' to Play Again';
     this.bindEvents();
 }
 
@@ -42,7 +48,7 @@ proto.bindEvents = function(){
     vent.on('update', this.refs.checkStart);
 
     vent.on('create', this.create.bind(this));
-    vent.on('start', this.hideTitle.bind(this));
+    vent.on('start', this.toggleTitle.bind(this, false));
     vent.on('game-over', this.showGameOver.bind(this));
     return this;
 };
@@ -89,28 +95,57 @@ proto.checkStart = function(){
 };
 
 
-proto.hideTitle = function(){
-    this.startText.visible = false;
-    this.titleText.visible = false;
+proto.toggleTitle = function ( val ) {
+    this.startText.visible = val;
+    this.titleText.visible = val;
+};
+
+
+proto.toggleGameOver = function ( val ) {
+    this.gameOverText.visible = val;
 };
 
 
 proto.showGameOver = function(){
     var game = this.game,
+        vent = this.gameState.vent,
         isUndefined = FooFighter.Util.isUndefined;
 
     if ( isUndefined(this.gameOverText) ) {
-        this.gameOverText =this.game.add.bitmapText(
-            this.game.world.centerX, this.game.world.centerY,
+        this.gameOverText = this.game.add.bitmapText(
+            this.game.world.centerX, this.game.world.centerY - 100,
             this.gameOver,
-            this.styles.title
+            this.styles.gameOver
         );
         this.gameOverText.anchor = {
             x: 0.5,
             y: 0.5
         };
+        this.restartText = this.game.add.bitmapText(
+            this.game.world.centerX, this.game.world.centerY,
+            this.restart,
+            this.styles.restart
+        );
+        this.restartText.anchor = {
+            x: 0.5,
+            y: 0.5
+        };
     } else {
-        this.gameOverText.visible = true;
+        this.toggleGameOver(true);
+    }
+
+    this.refs.checkRestart = this.checkRestart.bind(this);
+    vent.on('update', this.refs.checkRestart);
+};
+
+
+proto.checkRestart = function(){
+    var kb = this.gameState.keyboard,
+        vent = this.gameState.vent;
+
+    if ( kb.isDown(80) ) {
+        vent.off('update', this.refs.checkRestart);
+        window.location.reload(false);
     }
 };
 
