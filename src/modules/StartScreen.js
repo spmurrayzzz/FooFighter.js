@@ -30,9 +30,12 @@ function StartScreen ( gameState, group ) {
         }
     };
     this.refs = {};
-    this.title = 'FooFighter.js';
-    this.gameOver = 'Game Over';
-    this.restart = 'Press \'P\' to Play Again';
+    this.textStrings = {
+        start: 'Press \'S\' To Start Game',
+        restart: 'Press \'P\' to Play Again',
+        title: 'FooFighter.js',
+        gameOver: 'Game Over'
+    };
     this.bindEvents();
 }
 
@@ -59,7 +62,7 @@ proto.create = function(){
 
     this.titleText = this.game.add.bitmapText(
         this.game.world.centerX, this.game.world.centerY - 300,
-        this.title,
+        this.textStrings.title,
         this.styles.title
     );
     this.titleText.anchor = {
@@ -70,7 +73,7 @@ proto.create = function(){
 
     this.startText = this.game.add.bitmapText(
         this.game.world.centerX, this.game.world.centerY - 200,
-        'Press \'S\' To Start Game',
+        this.textStrings.start,
         this.styles.start
     );
     this.startText.anchor = {
@@ -103,6 +106,7 @@ proto.toggleTitle = function ( val ) {
 
 proto.toggleGameOver = function ( val ) {
     this.gameOverText.visible = val;
+    this.restartText.visible = val;
 };
 
 
@@ -114,7 +118,7 @@ proto.showGameOver = function(){
     if ( isUndefined(this.gameOverText) ) {
         this.gameOverText = this.game.add.bitmapText(
             this.game.world.centerX, this.game.world.centerY - 100,
-            this.gameOver,
+            this.textStrings.gameOver,
             this.styles.gameOver
         );
         this.gameOverText.anchor = {
@@ -123,7 +127,7 @@ proto.showGameOver = function(){
         };
         this.restartText = this.game.add.bitmapText(
             this.game.world.centerX, this.game.world.centerY,
-            this.restart,
+            this.textStrings.restart,
             this.styles.restart
         );
         this.restartText.anchor = {
