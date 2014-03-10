@@ -1,3 +1,12 @@
+/**
+ * StartScreen.js
+ *
+ * FooFighter.js — StartScreen module
+ *
+ * The purpose of this (not-so-aptly-named) module is to handle the rendering
+ * of all the display text related to start and end screens, as well as
+ * the event bindings to start and restart gameplay.
+ */
 
 ;(function( FooFighter ){
 
