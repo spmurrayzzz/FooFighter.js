@@ -119,6 +119,7 @@ proto.collisionHandlerLaser = function ( asteroid, laser ) {
 
     asteroid.kill();
     laser.kill();
+    this.gameState.vent.emit('asteroid-killed', asteroid);
     this.gameState.updateScore(points[asteroid.currentFrame.name]);
 };
 
@@ -129,16 +130,16 @@ proto.collisionHandlerPlayer = function ( player, asteroid ) {
 
 
 proto.asteroidExplosion = function ( asteroid ) {
-    var type = asteroid.sprite.currentFrame.name,
-        posX = asteroid.sprite.x,
-        posY = asteroid.sprite.y,
+    var type = asteroid.currentFrame.name,
+        posX = asteroid.x,
+        posY = asteroid.y,
         randInRange = FooFighter.Util.randInRange,
         seed = 20,
         velocities = this.config.explosionVelocites,
         roid,
         i;
 
-    if ( asteroid.sprite.currentFrame.name === 'meteorBig.png' ) {
+    if ( asteroid.currentFrame.name === 'meteorBig.png' ) {
         for (i = 0; i < 3; i++) {
             roid = this.createAsteroid({
                 x: randInRange(posX - seed, posX + seed),

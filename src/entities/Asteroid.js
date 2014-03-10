@@ -64,7 +64,7 @@ proto.create = function( typeVal, pos ) {
         y: 0.5
     };
     // Make sure we detect when the sprite is outside of the game scene
-    this.sprite.events.onOutOfBounds.add(this.sprite.kill);
+    this.sprite.events.onOutOfBoundsKill = true;
     // Give our asteroid a random Y axis velocity
     this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
 
@@ -79,12 +79,6 @@ proto.create = function( typeVal, pos ) {
         modifier = 1;
     }
     this.sprite.body.velocity.x = xVelocity * modifier;
-
-    // If an asteroid happens to be killed by a laser, make sure
-    // we fire an event so we can trigger a possible explosion
-    this.sprite.events.onKilled.dispatch = function(){
-        this.vent.emit('asteroid-killed', this);
-    }.bind(this);
 
     return this;
 };
