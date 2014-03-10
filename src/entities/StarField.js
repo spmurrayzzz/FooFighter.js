@@ -88,12 +88,12 @@ proto.create = function(){
             tile = stars.create(x*254, y*256, 'starBackground');
             tile.alpha = 0.25;
         }
-    };
+    }
 
     for (var i = config.field.numLines - 1; i >= 0; i--) {
         this.addSpeedLine.call(this);
     }
-    for (var i = config.field.numStars - 1; i >= 0; i--) {
+    for (i = config.field.numStars - 1; i >= 0; i--) {
         this.addStar.call(this);
     }
 
@@ -150,7 +150,7 @@ proto.addStar = function(){
         star;
 
     if ( Math.random() >= 0.9 ) {
-        starType = 'Background/starBig.png'
+        starType = 'Background/starBig.png';
     }
     star = this.game.add.sprite(
         game.world.width * Math.random(),
