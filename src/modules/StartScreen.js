@@ -36,6 +36,11 @@ function StartScreen ( gameState, group ) {
             font: "32px KenPixel",
             fill: "#ffff00",
             align: "center"
+        },
+        copyright: {
+            font: "18px KenPixel",
+            fill: "#ffff00",
+            align: "center"
         }
     };
     this.refs = {};
@@ -43,7 +48,8 @@ function StartScreen ( gameState, group ) {
         start: 'Press \'S\' To Start Game',
         restart: 'Press \'P\' to Play Again',
         title: 'FooFighter.js',
-        gameOver: 'Game Over'
+        gameOver: 'Game Over',
+        copyright: 'Copyright (c) 2014 Stephen Murray'
     };
     this.bindEvents();
 }
@@ -89,8 +95,19 @@ proto.create = function(){
         x: 0.5,
         y: 0.5
     };
-
     this.group.add(this.startText);
+
+    this.copyrightText = this.game.add.bitmapText(
+        this.game.world.centerX, this.game.world.height - 50,
+        this.textStrings.copyright,
+        this.styles.copyright
+    );
+    this.copyrightText.anchor = {
+        x: 0.5,
+        y: 0.5
+    };
+    this.group.add(this.copyrightText);
+
     return this;
 };
 
@@ -110,6 +127,7 @@ proto.checkStart = function(){
 proto.toggleTitle = function ( val ) {
     this.startText.visible = val;
     this.titleText.visible = val;
+    this.copyrightText.visible = val;
 };
 
 
