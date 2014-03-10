@@ -86,7 +86,7 @@ proto.create = function(){
     for (var x = -8; x < 8; x++) {
         for (var y = -6; y < 6; y++) {
             tile = stars.create(x*254, y*256, 'starBackground');
-            tile.alpha = 0.35;
+            tile.alpha = 0.25;
         }
     };
 
