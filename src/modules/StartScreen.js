@@ -43,7 +43,10 @@ function StartScreen ( gameState, group ) {
             align: "center"
         }
     };
-    this.refs = {};
+    this.refs = {
+        checkStart: null,
+        checkRestart: null
+    };
     this.textStrings = {
         start: 'Press \'S\' To Start Game',
         restart: 'Press \'P\' to Play Again',
