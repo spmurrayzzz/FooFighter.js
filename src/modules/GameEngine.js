@@ -142,8 +142,8 @@ proto.asteroidExplosion = function ( asteroid ) {
         for (i = 0; i < 3; i++) {
             roid = this.createAsteroid({
                 x: randInRange(posX - seed, posX + seed),
-                y: randInRange(posY - seed, posY + seed),
-            },1);
+                y: randInRange(posY - seed, posY + seed)
+            }, 1);
             roid.sprite.body.velocity.x = velocities[i];
         }
     }
