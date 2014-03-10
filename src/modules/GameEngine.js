@@ -30,7 +30,8 @@ function GameEngine ( gameState ){
             -200,
             100,
             200
-        ]
+        ],
+        numAsteroids: 20
     };
     this.bindEvents();
 }
