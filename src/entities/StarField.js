@@ -35,8 +35,8 @@ function StarField ( gameState, group ) {
         field: {
             lineSpeed: 800,
             starSpeed: 500,
-            lineOpacity: 0.08,
-            starOpacity: 0.15,
+            lineOpacity: 0.3,
+            starOpacity: 0.4,
             lineThrottle: 0,
             starThrottle: 0,
             numLines: 6,
@@ -86,7 +86,7 @@ proto.create = function(){
     for (var x = -8; x < 8; x++) {
         for (var y = -6; y < 6; y++) {
             tile = stars.create(x*254, y*256, 'starBackground');
-            tile.alpha = 0.25;
+            tile.alpha = 0.35;
         }
     }
 
