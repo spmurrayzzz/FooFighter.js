@@ -52,7 +52,7 @@ function StartScreen ( gameState, group ) {
         restart: 'Press \'P\' to Play Again',
         title: 'FooFighter.js',
         gameOver: 'Game Over',
-        copyright: 'Copyright (c) 2014 Stephen Murray'
+        copyright: 'Author: Stephen Murray'
     };
     this.bindEvents();
 }
