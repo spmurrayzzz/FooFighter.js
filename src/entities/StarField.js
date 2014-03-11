@@ -117,10 +117,11 @@ proto.addSpeedLine = function(){
     var field = this.config.field,
         randInRange = FooFighter.Util.randInRange,
         game = this.game,
+        group = this.gameState.groups.backGroup,
         variance = this.config.field.velocityVariance,
         line;
 
-    line = this.game.add.sprite(
+    line = group.create(
         game.world.width * Math.random(),
         game.world.height * Math.random(),
         'speedLine'
@@ -143,6 +144,7 @@ proto.addSpeedLine = function(){
 
 proto.addStar = function(){
     var field = this.config.field,
+        group = this.gameState.groups.backGroup,
         randInRange = FooFighter.Util.randInRange,
         starType = 'Background/starSmall.png',
         variance = this.config.field.velocityVariance,
@@ -152,7 +154,7 @@ proto.addStar = function(){
     if ( Math.random() >= 0.9 ) {
         starType = 'Background/starBig.png';
     }
-    star = this.game.add.sprite(
+    star = group.create(
         game.world.width * Math.random(),
         game.world.height * Math.random(),
         'sprites',
