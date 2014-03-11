@@ -86,11 +86,11 @@ proto.movementHandler = function(){
     } else if ( cursors.down.isDown ) {
         modifier = 1;
         axis = 'y';
-    } else if (cursors.left.isDown) {
+    } else if ( cursors.left.isDown ) {
         this.sprite.loadTexture('sprites', this.displayStates.left);
         modifier = -1;
         axis = 'x';
-    } else if (cursors.right.isDown) {
+    } else if ( cursors.right.isDown ) {
         this.sprite.loadTexture('sprites', this.displayStates.right);
         modifier = 1;
         axis = 'x';
