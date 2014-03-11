@@ -45,6 +45,7 @@ proto.bindEvents = function(){
     vent.on('start', this.start.bind(this));
     vent.on('update', this.checkCollisions.bind(this));
     vent.on('update', this.addEnemiesCheck.bind(this));
+    vent.on('update', this.cleanup.bind(this));
     vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
     return this;
 };
@@ -150,6 +151,15 @@ proto.asteroidExplosion = function ( asteroid ) {
     }
 
     return this;
+};
+
+
+proto.cleanup = function(){
+    var roid;
+
+    while ( roid = this.asteroids.getFirstDead() ) {
+        roid.destroy();
+    }
 };
 
 
