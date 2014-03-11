@@ -157,7 +157,7 @@ proto.asteroidExplosion = function ( asteroid ) {
 proto.cleanup = function(){
     var roid;
 
-    while ( roid = this.asteroids.getFirstDead() ) {
+    while ( roid = this.asteroids.getFirstExists(false) ) {
         roid.destroy();
     }
 };

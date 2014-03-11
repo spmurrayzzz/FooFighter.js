@@ -64,7 +64,7 @@ proto.create = function( typeVal, pos ) {
         y: 0.5
     };
     // Make sure we detect when the sprite is outside of the game scene
-    this.sprite.events.onOutOfBoundsKill = true;
+    this.sprite.outOfBoundsKill = true;
     // Give our asteroid a random Y axis velocity
     this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
 
