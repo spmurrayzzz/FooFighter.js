@@ -43,6 +43,7 @@ proto.bindEvents = function(){
     vent.on('update', function(){
         this.movementHandler();
         this.weaponHandler();
+        this.checkVelocity();
     }.bind(this));
     return this;
 };
@@ -156,18 +157,31 @@ proto.createLaser = function(){
             x: 0.5,
             y: 0.5
         };
-        // Set the movement speed
         // Clean up any lasers that leave the game scence
-        laser.events.onOutOfBounds.add(laser.kill, laser);
+        laser.outOfBoundsKill = true;
     } else {
-        laser.x = pos.x;
-        laser.y = pos.y
         laser.revive();
+        laser.x = pos.x;
+        laser.y = pos.y;
     }
 
     laser.body.velocity.y = velocity;
 
     return this;
+};
+
+
+// This is a super bad hack to deal with a bug I can't fix yet.
+// Whenever a laser collides with an asteroid and gets revived
+// to be reused, its velocity gets set back to zero before the next
+// update tick. This gives us a way to workaround the problem for now
+proto.checkVelocity = function(){
+    var velocity = this.config.laser.velocity;
+    this.lasers.forEach(function( laser ){
+        if ( laser.body.velocity.y !== velocity ) {
+            laser.body.velocity.y = velocity;
+        }
+    }, this, true);
 };
 
 
