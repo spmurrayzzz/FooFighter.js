@@ -43,9 +43,11 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
     vent.on('start', this.start.bind(this));
-    vent.on('update', this.checkCollisions.bind(this));
-    vent.on('update', this.addEnemiesCheck.bind(this));
-    vent.on('update', this.cleanup.bind(this));
+    vent.on('update', function(){
+        this.checkCollisions();
+        this.addEnemiesCheck();
+        this.cleanup();
+    }.bind(this));
     vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
     return this;
 };
