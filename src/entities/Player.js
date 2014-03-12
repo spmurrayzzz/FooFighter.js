@@ -134,25 +134,39 @@ proto.weaponHandler = function(){
 proto.createLaser = function(){
     var game = this.gameState.game,
         velocity = this.config.laser.velocity,
+        pos,
         laser;
 
-    // Create our laser sprite entity
-    laser = game.add.sprite(
-        this.sprite.body.x + this.sprite.body.width/2,
-        this.sprite.body.y - 10,
-        'sprites', 'laserGreen.png'
-    );
-    // Keep track of all our onscreen lasers (for collision detection)
-    this.lasers.add(laser);
-    // Anchor to the center of the sprite
-    laser.anchor = {
-        x: 0.5,
-        y: 0.5
+    pos = {
+        x: this.sprite.body.x + this.sprite.body.width/2,
+        y:this.sprite.body.y - 10
     };
-    // Set the movement speed
+
+    laser = this.lasers.getFirstExists(false);
+
+    if ( !laser ) {
+        // Create our laser sprite entity
+        laser = this.lasers.create(
+            pos.x,
+            pos.y,
+            'sprites', 'laserGreen.png'
+        );
+        // Anchor to the center of the sprite
+        laser.anchor = {
+            x: 0.5,
+            y: 0.5
+        };
+        // Set the movement speed
+        // Clean up any lasers that leave the game scence
+        laser.events.onOutOfBounds.add(laser.kill, laser);
+    } else {
+        laser.x = pos.x;
+        laser.y = pos.y
+        laser.revive();
+    }
+
     laser.body.velocity.y = velocity;
-    // Clean up any lasers that leave the game scence
-    laser.events.onOutOfBounds.add(laser.kill, laser);
+
     return this;
 };
 
