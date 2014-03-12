@@ -4,7 +4,7 @@ An experiment in making a really crappy starfighter game.
 
 Demo: [foofighterjs.com](http://foofighterjs.com/)
 
-## Install
+## To install
 
 ```bash
 # Install global grunt module
@@ -14,11 +14,19 @@ sudo npm install -g grunt
 npm install
 ```
 
-## Start app
+## To start app
 
 ```bash
 # Start a server @ localhost:3000
 npm start
+```
+
+## To build the game source
+
+```bash
+grunt
+# or to auto-build on save
+grunt watch
 ```
 
 
