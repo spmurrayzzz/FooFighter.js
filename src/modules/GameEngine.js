@@ -49,6 +49,10 @@ proto.bindEvents = function(){
         this.cleanup();
     }.bind(this));
     vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
+    vent.on('game-over', function(){
+        this.killAll();
+        this.stop();
+    }.bind(this));
     return this;
 };
 
@@ -162,6 +166,11 @@ proto.cleanup = function(){
     while ( roid = this.asteroids.getFirstExists(false) ) {
         roid.destroy();
     }
+};
+
+
+proto.killAll = function(){
+    this.asteroids.removeAll();
 };
 
 

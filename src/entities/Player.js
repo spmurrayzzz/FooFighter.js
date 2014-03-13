@@ -45,6 +45,7 @@ proto.bindEvents = function(){
         this.weaponHandler();
         this.checkVelocity();
     }.bind(this));
+    vent.on('out-of-time', this.kill.bind(this));
     return this;
 };
 
@@ -187,8 +188,12 @@ proto.checkVelocity = function(){
 
 proto.onKill = function(){
     var vent = this.gameState.vent;
-
     vent.emit('game-over');
+};
+
+
+proto.kill = function(){
+    this.sprite.kill();
 };
 
 

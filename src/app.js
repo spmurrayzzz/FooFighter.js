@@ -81,6 +81,7 @@ function preload(){
     entities.starField = new FooFighter.StarField(gameState, background);
     entities.player = new FooFighter.Player(gameState, frontGroup);
     entities.score = new FooFighter.Score(gameState, hudGroup);
+    entities.timer = new FooFighter.Timer(gameState, hudGroup);
 }
 
 

@@ -25,6 +25,7 @@ function GameState ( game ){
     this.cursors = {};
     this.modules = {};
     this.hasStarted = false;
+    this.timeLeft = 300;
 }
 
 var proto = GameState.prototype;
