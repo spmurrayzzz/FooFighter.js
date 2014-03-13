@@ -1,7 +1,7 @@
 
 ;(function( FooFighter ){
 
-"use strict;"
+'use strict';
 
 function Timer ( gameState, group ) {
     this.gameState = gameState;
