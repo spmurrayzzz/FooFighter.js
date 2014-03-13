@@ -89,15 +89,21 @@ proto.movementHandler = function(){
         modifier = 1;
         axis = 'y';
     } else if ( cursors.left.isDown ) {
-        this.sprite.loadTexture('sprites', this.displayStates.left);
+        if ( !this.isCurrentFrame(this.displayStates.left) ) {
+            this.sprite.loadTexture('sprites', this.displayStates.left);
+        }
         modifier = -1;
         axis = 'x';
     } else if ( cursors.right.isDown ) {
-        this.sprite.loadTexture('sprites', this.displayStates.right);
+        if ( !this.isCurrentFrame(this.displayStates.right) ) {
+            this.sprite.loadTexture('sprites', this.displayStates.right);
+        }
         modifier = 1;
         axis = 'x';
     } else {
-        this.sprite.loadTexture('sprites', this.displayStates.neutral);
+        if ( !this.isCurrentFrame(this.displayStates.neutral) ) {
+            this.sprite.loadTexture('sprites', this.displayStates.neutral);
+        }
     }
 
     // This is just the movement speed + directional modifier
@@ -194,6 +200,11 @@ proto.onKill = function(){
 
 proto.kill = function(){
     this.sprite.kill();
+};
+
+
+proto.isCurrentFrame = function ( frameName ) {
+    return frameName === this.sprite.currentFrame.name;
 };
 
 
