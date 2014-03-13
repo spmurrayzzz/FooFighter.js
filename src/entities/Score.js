@@ -36,6 +36,7 @@ proto.bindEvents = function(){
         // value of the current game score
         this.text.setText(this.prefix + this.gameState.score);
     }.bind(this));
+    vent.on('start', this.toggleVisibility.bind(this, true));
     return this;
 };
 
@@ -50,9 +51,15 @@ proto.create = function(){
         x: 1,
         y: 0
     };
+    this.toggleVisibility(false);
     this.group.add(this.text);
     return this;
 };
+
+
+proto.toggleVisibility = function ( show ) {
+    this.text.visible = show;
+}
 
 
 FooFighter.Score = Score;

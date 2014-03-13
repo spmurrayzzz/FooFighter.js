@@ -49,6 +49,7 @@ proto.create = function(){
         x: 0.5,
         y: 0
     };
+    this.text.visible = false;
     this.group.add(this.text);
     return this;
 };
@@ -61,6 +62,7 @@ proto.updateTime = function(){
 
 
 proto.startTimer = function(){
+    this.text.visible = true;
     this.timer = this.game.time.events.loop(1000, function(){
         this.gameState.timeLeft = Math.max(0, this.gameState.timeLeft - 1);
         if ( this.gameState.timeLeft === 0 ) {
