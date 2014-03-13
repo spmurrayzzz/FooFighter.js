@@ -1,3 +1,11 @@
+/**
+ * Timer.js
+ *
+ * FooFighter.js — Timer entity
+ *
+ * This class represents the Timer display entity. Displays time left
+ * and fires game-over events when time has lapsed.
+ */
 
 ;(function( FooFighter ){
 
