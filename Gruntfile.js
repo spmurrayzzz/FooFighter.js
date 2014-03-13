@@ -20,7 +20,7 @@ module.exports = function(grunt) {
           'dist/FooFighter.js': [
               'src/namespace.js',
               'src/modules/Util.js',
-              'src/vendor/Shout.js',
+              'bower_components/shout/shout.js',
               'src/modules/GameState.js',
               'src/modules/GameEngine.js',
               'src/modules/StartScreen.js',
