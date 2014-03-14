@@ -28,6 +28,7 @@ module.exports = function(grunt) {
               'src/entities/Timer.js',
               'src/entities/StarField.js',
               'src/entities/Player.js',
+              'src/entities/EnemyShip.js',
               'src/entities/Asteroid.js',
               'src/app.js'
           ]

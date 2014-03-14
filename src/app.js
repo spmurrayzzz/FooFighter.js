@@ -44,6 +44,7 @@ function preload(){
         backGroup   = game.add.group(),
         frontGroup  = game.add.group(),
         asteroids   = game.add.group(),
+        enemyShips  = game.add.group(),
         lasers      = game.add.group(),
         hudGroup    = game.add.group();
 
@@ -54,6 +55,7 @@ function preload(){
         frontGroup: frontGroup,
         hudGroup: hudGroup,
         asteroids: asteroids,
+        enemyShips: enemyShips,
         lasers: lasers
     };
 

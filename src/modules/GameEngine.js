@@ -20,7 +20,7 @@ function GameEngine ( gameState ){
     this.gameInProgress = false;
     this.lastEnemyCreated = d.getTime();
     this.config = {
-        enemyThrottleVal: 500,
+        enemyThrottleVal: 1500,
         bigToSmallPercentage: 0.6,
         points: {
             'meteorBig.png': 5,
@@ -81,11 +81,41 @@ proto.addEnemiesCheck = function(){
 
     if ( this.gameInProgress === true) {
         if ( currTime - lastTime >= throttleVal ) {
-            this.createAsteroid();
+            this.createEnemy();
             this.lastEnemyCreated = currTime;
         }
     }
     return this;
+};
+
+
+proto.createEnemy = function(){
+    var options,
+        val,
+        randInRange = FooFighter.Util.randInRange;
+
+    options = [
+        this.createAsteroid,
+        this.createEnemyShip,
+        this.createUFO
+    ];
+
+    val = parseInt(randInRange(0, options.length));
+    return options[val].call(this);
+};
+
+
+proto.createEnemyShip = function(){
+    var group = this.gameState.groups.enemyShips;
+
+    return new FooFighter.EnemyShip(
+        this.gameState, group
+    ).create();
+};
+
+
+proto.createUFO = function(){
+    console.log('ufo');
 };
 
 
