@@ -33,6 +33,9 @@ function GameEngine ( gameState ){
         ],
         numAsteroids: 20
     };
+    this.refs = {
+        onUpdate: null
+    };
     this.bindEvents();
 }
 
@@ -43,11 +46,6 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
     vent.on('start', this.start.bind(this));
-    vent.on('update', function(){
-        this.checkCollisions();
-        this.addEnemiesCheck();
-        this.cleanup();
-    }.bind(this));
     vent.on('asteroid-killed', this.asteroidExplosion.bind(this));
     vent.on('game-over', function(){
         this.killAll();
@@ -59,12 +57,19 @@ proto.bindEvents = function(){
 
 proto.start = function(){
     this.gameInProgress = true;
+    this.refs.onUpdate = function(){
+        this.checkCollisions();
+        this.addEnemiesCheck();
+        this.cleanup();
+    }.bind(this);
+    this.gameState.vent.on('update', this.refs.onUpdate);
     return this;
 };
 
 
 proto.stop = function(){
     this.gameInProgress = false;
+    this.gameState.vent.off('update', this.refs.onUpdate);
     return this;
 };
 
