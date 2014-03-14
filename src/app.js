@@ -46,6 +46,7 @@ function preload(){
         asteroids   = game.add.group(),
         enemyShips  = game.add.group(),
         lasers      = game.add.group(),
+        enemyLasers = game.add.group(),
         hudGroup    = game.add.group();
 
     // Keep group references so we can maintain a proper display index
@@ -56,7 +57,8 @@ function preload(){
         hudGroup: hudGroup,
         asteroids: asteroids,
         enemyShips: enemyShips,
-        lasers: lasers
+        lasers: lasers,
+        enemyLasers: enemyLasers
     };
 
     game.load.bitmapFont('KenPixel', 'assets/fonts/KenPixel.png', 'assets/fonts/KenPixel.fnt');
