@@ -71,15 +71,6 @@ proto.create = function(){
         stars,
         tile;
 
-
-    // Add the solid background sprite entity
-    // this.gameState.groups.background.add(
-    //     game.add.tileSprite(
-    //         0, 0, game.world.width, game.world.height, 'background'
-    //     )
-    // );
-    // Commenting this out for now, kind of like the darker game world
-
     // In another group, use our star tile png to create
     // the starfield background
     stars = this.group;
