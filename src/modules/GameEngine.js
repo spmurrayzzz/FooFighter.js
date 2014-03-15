@@ -16,11 +16,13 @@ function GameEngine ( gameState ){
     this.gameState = gameState;
     this.game = gameState.game;
     this.asteroids = this.gameState.groups.asteroids;
+    this.enemyShips = this.gameState.groups.enemyShips;
+    this.enemyLasers = this.gameState.groups.enemyLasers;
     this.lasers = this.gameState.groups.lasers;
     this.gameInProgress = false;
     this.lastEnemyCreated = d.getTime();
     this.config = {
-        enemyThrottleVal: 1500,
+        enemyThrottleVal: 1000,
         bigToSmallPercentage: 0.6,
         points: {
             'meteorBig.png': 5,
@@ -139,6 +141,7 @@ proto.createAsteroid = function( pos, sizeVal ){
 
 
 proto.checkCollisions = function(){
+    // Asteroids / lasers
     this.game.physics.collide(
         this.asteroids,
         this.lasers,
@@ -146,9 +149,24 @@ proto.checkCollisions = function(){
         null,
         this
     );
+    // Player / asteroids
     this.game.physics.collide(
         this.gameState.entities.player.sprite,
         this.asteroids, this.collisionHandlerPlayer,
+        null,
+        this
+    );
+    // Player / enemy ships
+    this.game.physics.collide(
+        this.gameState.entities.player.sprite,
+        this.enemyShips, this.collisionHandlerPlayer,
+        null,
+        this
+    );
+    // Player / enemy lasers
+    this.game.physics.collide(
+        this.gameState.entities.player.sprite,
+        this.enemyLasers, this.collisionHandlerPlayer,
         null,
         this
     );
@@ -205,6 +223,8 @@ proto.cleanup = function(){
 
 proto.killAll = function(){
     this.asteroids.removeAll();
+    this.enemyShips.removeAll();
+    this.enemyLasers.removeAll();
 };
 
 

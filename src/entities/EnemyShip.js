@@ -13,6 +13,9 @@ function EnemyShip ( gameState, group ) {
     this.laserVelocity = 500;
     this.lastFired = null;
     this.fireTimer = 1500;
+    this.refs = {
+        checkFireLaser: null
+    };
 }
 
 var proto = EnemyShip.prototype;
@@ -43,7 +46,11 @@ proto.create = function(){
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
-    vent.on('update', this.checkFireLaser.bind(this));
+    this.refs.checkFireLaser = this.checkFireLaser.bind(this);
+    vent.on('update', this.refs.checkFireLaser);
+    vent.on('game-over', function(){
+        vent.off('update', this.refs.checkFireLaser);
+    }.bind(this));
 };
 
 
