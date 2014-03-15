@@ -26,7 +26,8 @@ function GameEngine ( gameState ){
         bigToSmallPercentage: 0.6,
         points: {
             'meteorBig.png': 5,
-            'meteorSmall.png': 10
+            'meteorSmall.png': 10,
+            'enemyShip.png': 13
         },
         explosionVelocites: [
             -200,
@@ -141,7 +142,7 @@ proto.createAsteroid = function( pos, sizeVal ){
 
 
 proto.checkCollisions = function(){
-    // Asteroids / lasers
+    // Asteroids / player lasers
     this.game.physics.collide(
         this.asteroids,
         this.lasers,
@@ -170,17 +171,26 @@ proto.checkCollisions = function(){
         null,
         this
     );
+    // Enemy ships / player lasers
+    this.game.physics.collide(
+        this.enemyShips,
+        this.lasers, this.collisionHandlerLaser,
+        null,
+        this
+    );
     return this;
 };
 
 
-proto.collisionHandlerLaser = function ( asteroid, laser ) {
+proto.collisionHandlerLaser = function ( enemyObj, laser ) {
     var points = this.config.points;
 
-    asteroid.kill();
+    enemyObj.kill();
     laser.kill();
-    this.gameState.vent.emit('asteroid-killed', asteroid);
-    this.gameState.updateScore(points[asteroid.currentFrame.name]);
+    if ( enemyObj.currentFrame.name === 'meteorBig.png' ) {
+        this.gameState.vent.emit('asteroid-killed', enemyObj);
+    }
+    this.gameState.updateScore(points[enemyObj.currentFrame.name]);
 };
 
 
