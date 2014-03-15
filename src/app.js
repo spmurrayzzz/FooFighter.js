@@ -92,8 +92,8 @@ app = {
 
 gameConfig = {
     canvas: {
-        width: 1440,
-        height: 900
+        width: 1024,
+        height: 768
     }
 };
 
