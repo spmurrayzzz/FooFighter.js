@@ -15,12 +15,16 @@ module.exports = function( grunt ) {
         connect: require('./build/connect')
     });
 
+    // npm tasks
     grunt.loadNpmTasks('grunt-concat-sourcemap');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['jshint:game', 'concat_sourcemap', 'uglify']);
+    // custom local tasks
+    require('./build/custom-tasks/buildIndex')(grunt);
+
+    grunt.registerTask('default', ['jshint:game', 'concat_sourcemap', 'uglify', 'buildIndex']);
 
 };

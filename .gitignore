@@ -4,3 +4,5 @@ bower_components/
 node_modules/
 fabfile.py
 *.pyc
+./index.html
+.production
