@@ -1,3 +1,12 @@
+/**
+ * EnemyShip.js
+ *
+ * FooFighter.js — EnemyShip entity
+ *
+ * This class represents the display entity and data structure for an
+ * enemy ship unit. This unit fires towards the player while moving along
+ * the Y-axis.
+ */
 
 ;(function( FooFighter ){
 
