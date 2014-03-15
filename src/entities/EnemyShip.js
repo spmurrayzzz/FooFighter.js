@@ -23,7 +23,8 @@ function EnemyShip ( gameState, group ) {
     this.lastFired = null;
     this.fireTimer = 5000;
     this.refs = {
-        checkFireLaser: null
+        checkFireLaser: null,
+        adjustAngle: null
     };
 }
 
@@ -56,13 +57,21 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
     this.refs.checkFireLaser = this.checkFireLaser.bind(this);
-    vent.on('update', this.refs.checkFireLaser);
+    this.refs.adjustAngle = this.adjustAngle.bind(this);
+    vent.on('update', function(){
+        this.refs.checkFireLaser();
+        this.refs.adjustAngle();
+    }.bind(this));
     vent.on('game-over', function(){
         vent.off('update', this.refs.checkFireLaser);
+        vent.off('update', this.refs.adjustAngle);
     }.bind(this));
     this.sprite.events.onKilled.add(function(){
         vent.off('update', this.refs.checkFireLaser);
+        vent.off('update', this.refs.adjustAngle);
     }.bind(this));
+
+    // game.time.events.loop(1000, this.adjustAngle, this);
 };
 
 
@@ -114,6 +123,25 @@ proto.fireLaser = function(){
     );
     laser.angle = Phaser.Math.radToDeg(angle) + 90;
     game.physics.moveToXY(laser, player.x, player.y, velocity);
+};
+
+
+proto.adjustAngle = function(){
+    var player = this.gameState.entities.player.sprite,
+        game = this.game,
+        angle;
+
+    angle = Math.atan2(
+        (player.y - this.sprite.y),
+        (player.x - this.sprite.x)
+    );
+    game.add.tween(this.sprite)
+        .to(
+            { angle: Phaser.Math.radToDeg(angle) - 90 },
+            500,
+            Phaser.Easing.Bounce.Out,
+            true
+        );
 };
 
 
