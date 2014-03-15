@@ -1,6 +1,6 @@
 module.exports = {
     gruntfile: {
         files: require('./srcFiles'),
-        tasks: ['jshint:gruntfile']
+        tasks: ['jshint:gruntfile', 'default']
     }
 };

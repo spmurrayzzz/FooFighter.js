@@ -12,7 +12,10 @@ module.exports = {
         boss: true,
         eqnull: true,
         browser: true,
-        globals: {}
+        globals: {
+            'FooFighter': false,
+            'require': false
+        }
     },
     gruntfile: {
         src: 'Gruntfile.js'
