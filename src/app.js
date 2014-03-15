@@ -12,12 +12,12 @@
 
 'use strict';
 
-var App,
+var app,
     gameConfig,
     game,
     gameState;
 
-App = {
+app = {
     /**
      * Preload game assets (spritesheets, atlas data, individuals images)
      * @return {void}
@@ -103,9 +103,9 @@ game = new Phaser.Game(
     Phaser.AUTO,
     'main',
     {
-        preload: App.preload,
-        create: App.create,
-        update: App.update
+        preload: app.preload,
+        create: app.create,
+        update: app.update
     }
 );
 
