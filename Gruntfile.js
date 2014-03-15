@@ -2,7 +2,7 @@
 module.exports = function( grunt ) {
 
     grunt.initConfig(
-        require('./build/grunt-config')(grunt)
+        require('./build/gruntConfig')(grunt)
     );
 
     // npm tasks
