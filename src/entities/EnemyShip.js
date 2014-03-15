@@ -129,19 +129,20 @@ proto.fireLaser = function(){
 proto.adjustAngle = function(){
     var player = this.gameState.entities.player.sprite,
         game = this.game,
+        tween,
         angle;
 
     angle = Math.atan2(
         (player.y - this.sprite.y),
         (player.x - this.sprite.x)
     );
-    game.add.tween(this.sprite)
-        .to(
-            { angle: Phaser.Math.radToDeg(angle) - 90 },
-            500,
-            Phaser.Easing.Bounce.Out,
-            true
-        );
+    tween = game.add.tween(this.sprite);
+    tween.to(
+        { angle: Phaser.Math.radToDeg(angle) - 90 },
+        500,
+        Phaser.Easing.Bounce.Out,
+        true
+    );
 };
 
 
