@@ -75,7 +75,7 @@ proto.create = function(){
     for (var x = -8; x < 8; x++) {
         for (var y = -6; y < 6; y++) {
             tile = stars.create(x*254, y*256, 'starBackground');
-            tile.alpha = 0.35;
+            tile.alpha = 0.28;
         }
     }
 
@@ -96,7 +96,7 @@ proto.moveField = function(){
     // This is a bit of a hack, we're just moving the background
     // group along the Y axis and starting over when we go too far
     stars.y = stars.y > 768 ? 0 : stars.y;
-    stars.y += 2.0;
+    stars.y += 4.0;
 
     return this;
 };
