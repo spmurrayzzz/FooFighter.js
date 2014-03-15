@@ -5,6 +5,7 @@ module.exports = function( grunt ){
 
         fs.readFile('./build/templates/index.html.tmpl', function( err, data ) {
             var content = new String(data),
+                currTime = new Date().getTime(),
                 newContent,
                 msg;
 
@@ -13,10 +14,14 @@ module.exports = function( grunt ){
             }
 
             if ( fs.existsSync('./.production') ) {
-                newContent = content.replace('{{ srcFile }}', 'FooFighter.min.js');
+                newContent = content.replace(
+                    '{{ srcFile }}', 'FooFighter.min.js?d=' + currTime
+                );
                 msg = 'Built production version of index.html';
             } else {
-                newContent = content.replace('{{ srcFile }}', 'FooFighter.js');
+                newContent = content.replace(
+                    '{{ srcFile }}', 'FooFighter.js?d=' + currTime
+                );
                 msg = 'Built development version of index.html';
             }
 
