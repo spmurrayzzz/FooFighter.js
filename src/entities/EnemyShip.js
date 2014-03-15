@@ -10,9 +10,9 @@ function EnemyShip ( gameState, group ) {
         min: 50,
         max: 250
     };
-    this.laserVelocity = 500;
+    this.laserVelocity = 300;
     this.lastFired = null;
-    this.fireTimer = 1500;
+    this.fireTimer = 5000;
     this.refs = {
         checkFireLaser: null
     };
@@ -27,10 +27,9 @@ proto.create = function(){
         maxVelocity = this.velocityRange.max,
         randInRange = FooFighter.Util.randInRange;
 
-    console.log('enemyShip');
     this.sprite = this.group.create(
         game.world.width * Math.random(),
-        -50,
+        -20,
         'sprites',
         'enemyShip.png'
     );
@@ -38,6 +37,7 @@ proto.create = function(){
         x: 0.5,
         y: 0.5
     };
+    this.sprite.outOfBoundsKill = true;
     this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
     this.bindEvents();
 };
@@ -69,6 +69,10 @@ proto.checkFireLaser = function(){
 
 proto.fireLaser = function(){
     var group = this.gameState.groups.enemyLasers,
+        game = this.game,
+        player = this.gameState.entities.player.sprite,
+        velocity = this.laserVelocity,
+        angle,
         pos,
         laser;
 
@@ -87,17 +91,20 @@ proto.fireLaser = function(){
             'laserRed.png'
         );
         laser.anchor = {
-            x: 0.5,
-            y: 1
+            x: 0,
+            y: 0
         };
         laser.outOfBoundsKill = true;
     } else {
-        laser.revive();
-        laser.x = pos.x;
-        laser.y = pos.y;
+        laser.revive().reset(pos.x, pos.y);
     }
 
-    laser.body.velocity.y = this.laserVelocity;
+    angle = Math.atan2(
+        (player.y - laser.y),
+        (player.x - laser.x)
+    );
+    laser.angle = Phaser.Math.radToDeg(angle) + 90;
+    game.physics.moveToXY(laser, player.x, player.y, velocity);
 };
 
 

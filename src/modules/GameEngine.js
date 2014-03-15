@@ -93,17 +93,13 @@ proto.addEnemiesCheck = function(){
 
 
 proto.createEnemy = function(){
-    var options,
-        val,
-        randInRange = FooFighter.Util.randInRange;
+    var randInRange = FooFighter.Util.randInRange;
 
-    options = [
-        this.createAsteroid,
-        this.createEnemyShip
-    ];
-
-    val = parseInt(randInRange(0, options.length));
-    return options[val].call(this);
+    if ( randInRange(0, 100) >= 80 ) {
+        this.createEnemyShip();
+    } else {
+        this.createAsteroid();
+    }
 };
 
 
