@@ -99,8 +99,7 @@ proto.createEnemy = function(){
 
     options = [
         this.createAsteroid,
-        this.createEnemyShip,
-        this.createUFO
+        this.createEnemyShip
     ];
 
     val = parseInt(randInRange(0, options.length));

@@ -51,6 +51,9 @@ proto.bindEvents = function(){
     vent.on('game-over', function(){
         vent.off('update', this.refs.checkFireLaser);
     }.bind(this));
+    this.sprite.events.onKilled.add(function(){
+        vent.off('update', this.refs.checkFireLaser);
+    }.bind(this));
 };
 
 
