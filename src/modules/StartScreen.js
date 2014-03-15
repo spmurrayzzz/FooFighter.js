@@ -76,8 +76,6 @@ proto.bindEvents = function(){
 
 
 proto.create = function(){
-    var vent = this.gameState.vent;
-
     this.titleText = this.game.add.bitmapText(
         this.game.world.centerX, this.game.world.centerY - 300,
         this.textStrings.title,
@@ -141,8 +139,7 @@ proto.toggleGameOver = function ( val ) {
 
 
 proto.showGameOver = function(){
-    var game = this.game,
-        vent = this.gameState.vent,
+    var vent = this.gameState.vent,
         isUndefined = FooFighter.Util.isUndefined;
 
     if ( isUndefined(this.gameOverText) ) {

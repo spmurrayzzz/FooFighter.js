@@ -166,14 +166,13 @@ proto.collisionHandlerLaser = function ( asteroid, laser ) {
 };
 
 
-proto.collisionHandlerPlayer = function ( player, asteroid ) {
+proto.collisionHandlerPlayer = function ( player ) {
     player.kill();
 };
 
 
 proto.asteroidExplosion = function ( asteroid ) {
-    var type = asteroid.currentFrame.name,
-        posX = asteroid.x,
+    var posX = asteroid.x,
         posY = asteroid.y,
         randInRange = FooFighter.Util.randInRange,
         seed = 20,

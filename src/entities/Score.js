@@ -16,7 +16,7 @@ function Score ( gameState, group ) {
     this.game = gameState.game;
     this.group = group;
     this.text = {};
-    this.prefix = 'Score: '
+    this.prefix = 'Score: ';
     this.style = {
         font: "25px KenPixel",
         fill: "#ffff00",
@@ -59,7 +59,7 @@ proto.create = function(){
 
 proto.toggleVisibility = function ( show ) {
     this.text.visible = show;
-}
+};
 
 
 FooFighter.Score = Score;

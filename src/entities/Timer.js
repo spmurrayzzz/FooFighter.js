@@ -16,7 +16,7 @@ function Timer ( gameState, group ) {
     this.game = gameState.game;
     this.group = group;
     this.text = {};
-    this.prefix = 'Time Left: '
+    this.prefix = 'Time Left: ';
     this.style = {
         font: "25px KenPixel",
         fill: "#ffff00",

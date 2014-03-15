@@ -14,7 +14,10 @@ module.exports = {
         browser: true,
         globals: {
             'FooFighter': false,
-            'require': false
+            'require': false,
+            'Phaser': false,
+            'Shout': false,
+            'console': false
         }
     },
     gruntfile: {

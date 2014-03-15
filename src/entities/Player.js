@@ -71,8 +71,7 @@ proto.create = function(){
 
 
 proto.movementHandler = function(){
-    var game = this.gameState.game,
-        magnitude = this.movementVelocity,
+    var magnitude = this.movementVelocity,
         modifier = 1,
         axis,
         cursors = this.gameState.cursors;
@@ -113,13 +112,10 @@ proto.movementHandler = function(){
 
 
 proto.weaponHandler = function(){
-    var game = this.gameState.game,
-        cursors = this.gameState.cursors,
-        keyboard = this.gameState.keyboard,
+    var keyboard = this.gameState.keyboard,
         currTime = new Date().getTime(),
         lastFired = this.lastFired,
-        throttleVal = this.config.laser.fireTimer,
-        laser;
+        throttleVal = this.config.laser.fireTimer;
 
     // If we're dead, don't fire a got damn laser
     if ( !this.sprite.alive ) {
@@ -140,8 +136,7 @@ proto.weaponHandler = function(){
 
 
 proto.createLaser = function(){
-    var game = this.gameState.game,
-        velocity = this.config.laser.velocity,
+    var velocity = this.config.laser.velocity,
         pos,
         laser;
 

@@ -65,9 +65,7 @@ proto.bindEvents = function(){
 
 
 proto.create = function(){
-    var gs = this.gameState,
-        config = this.config,
-        game = gs.game,
+    var config = this.config,
         stars,
         tile;
 
@@ -109,7 +107,6 @@ proto.addSpeedLine = function(){
         randInRange = FooFighter.Util.randInRange,
         game = this.game,
         group = this.gameState.groups.backGroup,
-        variance = this.config.field.velocityVariance,
         line;
 
     line = group.create(

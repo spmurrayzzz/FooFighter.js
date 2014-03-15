@@ -12,27 +12,6 @@
 
 'use strict';
 
-var gameConfig = {
-        canvas: {
-            width: 1440,
-            height: 900
-        },
-        hasStarted: false
-},
-    game = new Phaser.Game(
-        gameConfig.canvas.width,
-        gameConfig.canvas.height,
-        Phaser.AUTO,
-        'main',
-        {
-            preload: preload,
-            create: create,
-            update: update
-        }
-    ),
-    gameState = FooFighter._gs = new FooFighter.GameState(game);
-
-
 /**
  * Preload game assets (spritesheets, atlas data, individuals images)
  * @return {void}
@@ -103,5 +82,24 @@ function update(){
     gameState.vent.emit('update');
 }
 
+var gameConfig = {
+        canvas: {
+            width: 1440,
+            height: 900
+        },
+        hasStarted: false
+    },
+    game = new Phaser.Game(
+        gameConfig.canvas.width,
+        gameConfig.canvas.height,
+        Phaser.AUTO,
+        'main',
+        {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    ),
+    gameState = FooFighter._gs = new FooFighter.GameState(game);
 
 })(FooFighter, Phaser);
