@@ -34,13 +34,13 @@ function StarField ( gameState, group ) {
     this.config = {
         field: {
             lineSpeed: 800,
-            starSpeed: 500,
-            lineOpacity: 0.3,
-            starOpacity: 0.4,
+            starSpeed: 200,
+            lineOpacity: 0.2,
+            starOpacity: 0.15,
             lineThrottle: 0,
             starThrottle: 0,
             numLines: 6,
-            numStars: 100,
+            numStars: 150,
             velocityVariance: 0.5
         }
     };
@@ -75,7 +75,7 @@ proto.create = function(){
     for (var x = -8; x < 8; x++) {
         for (var y = -6; y < 6; y++) {
             tile = stars.create(x*254, y*256, 'starBackground');
-            tile.alpha = 0.285;
+            tile.alpha = 0.19;
         }
     }
 
@@ -96,7 +96,7 @@ proto.moveField = function(){
     // This is a bit of a hack, we're just moving the background
     // group along the Y axis and starting over when we go too far
     stars.y = stars.y > 768 ? 0 : stars.y;
-    stars.y += 4.0;
+    // stars.y += 4.0;
 
     return this;
 };
