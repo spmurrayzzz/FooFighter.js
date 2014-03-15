@@ -36,7 +36,7 @@ function StarField ( gameState, group ) {
             lineSpeed: 800,
             starSpeed: 200,
             lineOpacity: 0.2,
-            starOpacity: 0.15,
+            starOpacity: 0.25,
             lineThrottle: 0,
             starThrottle: 0,
             numLines: 6,
