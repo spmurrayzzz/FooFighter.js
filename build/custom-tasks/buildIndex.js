@@ -8,6 +8,10 @@ module.exports = function( grunt ){
                 newContent,
                 msg;
 
+            if ( err ) {
+                throw err;
+            }
+
             if ( fs.existsSync('./.production') ) {
                 newContent = content.replace('{{ srcFile }}', 'FooFighter.min.js');
                 msg = 'Built production version of index.html';
@@ -16,9 +20,13 @@ module.exports = function( grunt ){
                 msg = 'Built development version of index.html';
             }
 
-            fs.writeFileSync('./index.html', newContent);
-            grunt.log.write(msg + '\n').ok();
-            done(true);
+            fs.writeFile('./index.html', newContent, function( err ) {
+                if ( err ) {
+                    throw err;
+                }
+                grunt.log.write(msg + '\n').ok();
+                done(true);
+            });
         });
 
     });
