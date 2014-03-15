@@ -1,6 +1,22 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+  var srcFiles = [
+    'src/namespace.js',
+    'src/modules/Util.js',
+    'bower_components/shout/shout.js',
+    'src/modules/GameState.js',
+    'src/modules/GameEngine.js',
+    'src/modules/StartScreen.js',
+    'src/entities/Score.js',
+    'src/entities/Timer.js',
+    'src/entities/StarField.js',
+    'src/entities/Player.js',
+    'src/entities/EnemyShip.js',
+    'src/entities/Asteroid.js',
+    'src/app.js'
+  ];
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
@@ -14,21 +30,7 @@ module.exports = function(grunt) {
       },
       target: {
         files: {
-          'dist/FooFighter.js': [
-              'src/namespace.js',
-              'src/modules/Util.js',
-              'bower_components/shout/shout.js',
-              'src/modules/GameState.js',
-              'src/modules/GameEngine.js',
-              'src/modules/StartScreen.js',
-              'src/entities/Score.js',
-              'src/entities/Timer.js',
-              'src/entities/StarField.js',
-              'src/entities/Player.js',
-              'src/entities/EnemyShip.js',
-              'src/entities/Asteroid.js',
-              'src/app.js'
-          ]
+          'dist/FooFighter.js': srcFiles
         }
       }
     },
@@ -62,12 +64,15 @@ module.exports = function(grunt) {
       },
       gruntfile: {
         src: 'Gruntfile.js'
+      },
+      game: {
+        src: srcFiles
       }
     },
     watch: {
       gruntfile: {
         files: ['src/**/*.js','src/*.js'],
-        tasks: ['jshint:gruntfile', 'default']
+        tasks: ['jshint:gruntfile']
       }
     },
     connect: {
@@ -89,6 +94,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'concat_sourcemap', 'uglify']);
+  grunt.registerTask('default', ['concat_sourcemap', 'uglify']);
 
 };
