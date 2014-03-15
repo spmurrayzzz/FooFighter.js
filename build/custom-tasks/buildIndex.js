@@ -3,7 +3,7 @@ module.exports = function( grunt ){
         var done = this.async(),
             fs = require('fs');
 
-        fs.readFile('./build/templates/index.html', function( err, data ) {
+        fs.readFile('./build/templates/index.html.tmpl', function( err, data ) {
             var content = new String(data),
                 newContent,
                 msg;
