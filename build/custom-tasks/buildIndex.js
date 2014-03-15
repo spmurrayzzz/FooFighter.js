@@ -15,13 +15,13 @@ module.exports = function( grunt ){
 
             if ( fs.existsSync('./.production') ) {
                 newContent = content.replace(
-                    '{{ srcFile }}', 'FooFighter.min.js?d=' + currTime
-                );
+                    /{{ build }}/g, '.min.js'
+                ).replace('{{ time }}', currTime);
                 msg = 'Built production version of index.html';
             } else {
                 newContent = content.replace(
-                    '{{ srcFile }}', 'FooFighter.js?d=' + currTime
-                );
+                    /{{ build }}/g, '.js'
+                ).replace('{{ time }}', currTime);
                 msg = 'Built development version of index.html';
             }
 
