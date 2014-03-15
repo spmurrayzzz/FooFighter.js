@@ -96,7 +96,7 @@ proto.moveField = function(){
     // This is a bit of a hack, we're just moving the background
     // group along the Y axis and starting over when we go too far
     stars.y = stars.y > 768 ? 0 : stars.y;
-    stars.y += 6.0;
+    stars.y += 2.0;
 
     return this;
 };
