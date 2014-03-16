@@ -124,6 +124,7 @@ proto.addSpeedLine = function(){
         this.body.velocity.y = randInRange(
             field.lineSpeed * 0.5, field.lineSpeed
         );
+        this.alpha = field.lineOpacity * randInRange(0.1, 1);
     }, line);
 
     return line;
@@ -158,6 +159,7 @@ proto.addStar = function(){
         this.body.velocity.y = randInRange(
             field.starSpeed * variance, field.starSpeed
         );
+        this.alpha = field.starOpacity * randInRange(0.1, 1);
     }, star);
 
     return star;
