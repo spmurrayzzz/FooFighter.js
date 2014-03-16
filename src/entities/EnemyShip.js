@@ -25,6 +25,7 @@ function EnemyShip ( gameState, group ) {
     this.refs = {
         update: null
     };
+    this.lastAngle = null;
 }
 
 var proto = EnemyShip.prototype;
@@ -48,6 +49,7 @@ proto.create = function(){
     };
     this.sprite.outOfBoundsKill = true;
     this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
+    this.lastAngle = this.sprite.angle;
     this.bindEvents();
 };
 
@@ -125,21 +127,14 @@ proto.fireLaser = function(){
 
 proto.adjustAngle = function(){
     var player = this.gameState.entities.player.sprite,
-        game = this.game,
-        tween,
         angle;
 
     angle = Math.atan2(
         (player.y - this.sprite.y),
         (player.x - this.sprite.x)
     );
-    tween = game.add.tween(this.sprite);
-    tween.to(
-        { angle: Phaser.Math.radToDeg(angle) - 90 },
-        500,
-        Phaser.Easing.Bounce.Out,
-        true
-    );
+    angle = 360 - (-(Phaser.Math.radToDeg(angle) - 90 ));
+    this.sprite.angle = angle;
 };
 
 
