@@ -65,7 +65,6 @@ proto.start = function(){
     this.refs.onUpdate = function(){
         this.checkCollisions();
         this.addEnemiesCheck();
-        this.cleanup();
     }.bind(this);
     this.gameState.vent.on('update', this.refs.onUpdate);
     return this;
@@ -237,15 +236,6 @@ proto.asteroidExplosion = function ( asteroid ) {
     }
 
     return this;
-};
-
-
-proto.cleanup = function(){
-    var roid;
-
-    while ( roid = this.asteroids.getFirstExists(false) ) {
-        roid.destroy();
-    }
 };
 
 

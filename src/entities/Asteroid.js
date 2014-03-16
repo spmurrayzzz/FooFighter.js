@@ -12,6 +12,7 @@
 
 function Asteroid ( gameState, group ) {
     this.gameState = gameState;
+    this.game = gameState.game;
     this.vent = gameState.vent;
     this.group = group;
     this.sprite = {};
@@ -79,6 +80,13 @@ proto.create = function( typeVal, pos ) {
         modifier = 1;
     }
     this.sprite.body.velocity.x = xVelocity * modifier;
+
+    this.sprite.events.onKilled.add(function(){
+        this.game.time.events.add(
+            5000,
+            this.sprite.destroy.bind(this.sprite)
+        );
+    }.bind(this));
 
     return this;
 };

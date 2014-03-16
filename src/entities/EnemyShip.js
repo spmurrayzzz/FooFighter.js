@@ -66,6 +66,10 @@ proto.bindEvents = function(){
     }.bind(this));
     this.sprite.events.onKilled.add(function(){
         vent.off('update', this.refs.update);
+        this.game.time.events.add(
+            5000,
+            this.sprite.destroy.bind(this.sprite)
+        );
     }.bind(this));
 };
 

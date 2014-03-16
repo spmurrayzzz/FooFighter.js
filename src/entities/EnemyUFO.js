@@ -50,7 +50,10 @@ proto.create = function(){
 
 proto.bindEvents = function(){
     this.sprite.events.onKilled.add(function(){
-        this.game.time.events.add(5000, this.sprite.destroy.bind(this.sprite));
+        this.game.time.events.add(
+            5000,
+            this.sprite.destroy.bind(this.sprite)
+        );
     }.bind(this));
 };
 
