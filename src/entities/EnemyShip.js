@@ -25,7 +25,6 @@ function EnemyShip ( gameState, group ) {
     this.refs = {
         update: null
     };
-    this.lastAngle = null;
 }
 
 var proto = EnemyShip.prototype;
@@ -49,7 +48,6 @@ proto.create = function(){
     };
     this.sprite.outOfBoundsKill = true;
     this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
-    this.lastAngle = this.sprite.angle;
     this.bindEvents();
 };
 
@@ -69,8 +67,6 @@ proto.bindEvents = function(){
     this.sprite.events.onKilled.add(function(){
         vent.off('update', this.refs.update);
     }.bind(this));
-
-    // game.time.events.loop(1000, this.adjustAngle, this);
 };
 
 
