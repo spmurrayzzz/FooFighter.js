@@ -7,16 +7,6 @@ function EnemyUFO ( gameState, group ) {
     this.vent = gameState.vent;
     this.group = group;
     this.sprite = null;
-    this.velocityRange = {
-        min: 50,
-        max: 250
-    };
-    this.laserVelocity = 300;
-    this.lastFired = null;
-    this.fireTimer = 5000;
-    this.refs = {
-        update: null
-    };
 }
 
 var proto = EnemyUFO.prototype;
