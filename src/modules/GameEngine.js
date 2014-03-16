@@ -97,7 +97,7 @@ proto.createEnemy = function(){
     var randInRange = FooFighter.Util.randInRange,
         val = randInRange(0, 100);
 
-    if ( val >= 60 && val < 90 ) {
+    if ( val >= 70 && val < 90 ) {
         this.createEnemyShip();
     } else if ( val >= 90 ) {
         this.createUFO();
