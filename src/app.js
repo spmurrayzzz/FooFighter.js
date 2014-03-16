@@ -30,6 +30,7 @@ app = {
             frontGroup  = game.add.group(),
             asteroids   = game.add.group(),
             enemyShips  = game.add.group(),
+            enemyUFOs   = game.add.group(),
             lasers      = game.add.group(),
             enemyLasers = game.add.group(),
             hudGroup    = game.add.group();
@@ -42,6 +43,7 @@ app = {
             hudGroup: hudGroup,
             asteroids: asteroids,
             enemyShips: enemyShips,
+            enemyUFOs: enemyUFOs,
             lasers: lasers,
             enemyLasers: enemyLasers
         };

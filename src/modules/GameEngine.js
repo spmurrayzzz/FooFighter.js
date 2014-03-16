@@ -18,6 +18,7 @@ function GameEngine ( gameState ){
     this.asteroids = this.gameState.groups.asteroids;
     this.enemyShips = this.gameState.groups.enemyShips;
     this.enemyLasers = this.gameState.groups.enemyLasers;
+    this.enemyUFOs = this.gameState.groups.enemyUFOs;
     this.lasers = this.gameState.groups.lasers;
     this.gameInProgress = false;
     this.lastEnemyCreated = d.getTime();
@@ -27,7 +28,8 @@ function GameEngine ( gameState ){
         points: {
             'meteorBig.png': 5,
             'meteorSmall.png': 10,
-            'enemyShip.png': 13
+            'enemyShip.png': 15,
+            'enemyUFO.png': 18
         },
         explosionVelocites: [
             -200,
@@ -93,10 +95,13 @@ proto.addEnemiesCheck = function(){
 
 
 proto.createEnemy = function(){
-    var randInRange = FooFighter.Util.randInRange;
+    var randInRange = FooFighter.Util.randInRange,
+        val = randInRange(0, 100);
 
-    if ( randInRange(0, 100) >= 80 ) {
+    if ( val >= 60 && val < 90 ) {
         this.createEnemyShip();
+    } else if ( val >= 90 ) {
+        this.createUFO();
     } else {
         this.createAsteroid();
     }
@@ -113,7 +118,11 @@ proto.createEnemyShip = function(){
 
 
 proto.createUFO = function(){
-    console.log('ufo');
+    var group = this.gameState.groups.enemyUFOs;
+
+    return new FooFighter.EnemyUFO(
+        this.gameState, group
+    ).create();
 };
 
 
@@ -170,6 +179,20 @@ proto.checkCollisions = function(){
     this.game.physics.collide(
         this.enemyShips,
         this.lasers, this.collisionHandlerLaser,
+        null,
+        this
+    );
+    // Enemy UFOs / player lasers
+    this.game.physics.collide(
+        this.enemyUFOs,
+        this.lasers, this.collisionHandlerLaser,
+        null,
+        this
+    );
+    // Player / enemy UFOs
+    this.game.physics.collide(
+        this.gameState.entities.player.sprite,
+        this.enemyUFOs, this.collisionHandlerPlayer,
         null,
         this
     );
@@ -230,6 +253,7 @@ proto.killAll = function(){
     this.asteroids.removeAll();
     this.enemyShips.removeAll();
     this.enemyLasers.removeAll();
+    this.enemyUFOs.removeAll();
 };
 
 
