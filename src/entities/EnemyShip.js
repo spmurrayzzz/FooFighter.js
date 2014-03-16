@@ -23,8 +23,7 @@ function EnemyShip ( gameState, group ) {
     this.lastFired = null;
     this.fireTimer = 5000;
     this.refs = {
-        checkFireLaser: null,
-        adjustAngle: null
+        update: null
     };
 }
 
@@ -56,19 +55,17 @@ proto.create = function(){
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
-    this.refs.checkFireLaser = this.checkFireLaser.bind(this);
-    this.refs.adjustAngle = this.adjustAngle.bind(this);
-    vent.on('update', function(){
-        this.refs.checkFireLaser();
-        this.refs.adjustAngle();
-    }.bind(this));
+    this.refs.update = function(){
+        this.checkFireLaser();
+        this.adjustAngle();
+    }.bind(this);
+
+    vent.on('update', this.refs.update);
     vent.on('game-over', function(){
-        vent.off('update', this.refs.checkFireLaser);
-        vent.off('update', this.refs.adjustAngle);
+        vent.off('update', this.refs.update);
     }.bind(this));
     this.sprite.events.onKilled.add(function(){
-        vent.off('update', this.refs.checkFireLaser);
-        vent.off('update', this.refs.adjustAngle);
+        vent.off('update', this.refs.update);
     }.bind(this));
 
     // game.time.events.loop(1000, this.adjustAngle, this);
