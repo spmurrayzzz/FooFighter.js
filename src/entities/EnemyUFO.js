@@ -1,3 +1,12 @@
+/**
+ * EnemyUFO.js
+ *
+ * FooFighter.js — EnemyUFO entity
+ *
+ * This class represents the display entity and data structure for an
+ * enemy UFO unit. The UFO will accelerate towards the player in a
+ * kamikaze-esque move.
+ */
 
 ;(function( FooFighter ){
 
