@@ -13,7 +13,6 @@
 'use strict';
 
 var app,
-    gameConfig,
     game,
     gameState;
 
@@ -94,16 +93,9 @@ app = {
     }
 };
 
-gameConfig = {
-    canvas: {
-        width: 1280,
-        height: 768
-    }
-};
-
 game = new Phaser.Game(
-    gameConfig.canvas.width,
-    gameConfig.canvas.height,
+    1280,
+    768,
     Phaser.AUTO,
     'main',
     {
