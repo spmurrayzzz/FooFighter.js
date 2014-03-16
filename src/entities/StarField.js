@@ -114,7 +114,7 @@ proto.addSpeedLine = function(){
         game.world.height * Math.random(),
         'speedLine'
     );
-    line.alpha = field.lineOpacity;
+    line.alpha = field.lineOpacity * randInRange(0.1, 1);
     line.body.velocity.y = randInRange(
         field.lineSpeed * 0.5, field.lineSpeed
     );
@@ -148,7 +148,7 @@ proto.addStar = function(){
         'sprites',
         starType
     );
-    star.alpha = field.starOpacity;
+    star.alpha = field.starOpacity * randInRange(0.1, 1);
     star.body.velocity.y = randInRange(
         field.starSpeed * variance, field.starSpeed
     );
