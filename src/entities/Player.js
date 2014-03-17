@@ -66,7 +66,7 @@ proto.create = function(){
     // Add it to the correct display group
     this.group.add(this.sprite);
     this.sprite.events.onKilled.add(this.onKill.bind(this));
-    this.sprite.body.setRectangle(83, 45, 8, 30);
+    this.sprite.body.setRectangle(83, 25, 8, 30);
     return this;
 };
 
