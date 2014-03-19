@@ -53,6 +53,27 @@ proto.createSprite = function( sheet, frame, options ){
 };
 
 
+proto.recycleSprite = function( group, options ){
+    var sprite;
+
+    if ( typeof group === 'undefined' ) {
+        throw new Error('Recycle functionality requires a group.');
+    }
+
+    sprite = group.getFirstExists(false);
+
+    if ( !sprite ) {
+        return false;
+    } else {
+        sprite.revive();
+        sprite.reset(options.x, options.y);
+    }
+
+    return sprite;
+
+};
+
+
 FooFighter.SpriteFactory = SpriteFactory;
 
 })(FooFighter);
