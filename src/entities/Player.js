@@ -30,6 +30,7 @@ function Player ( gameState, group ) {
         fireTimer: 250
     };
     this.lasers = gameState.groups.lasers;
+    this.sf = new FooFighter.SpriteFactory(gameState);
     this.bindEvents();
 }
 
@@ -51,20 +52,23 @@ proto.bindEvents = function(){
 
 
 proto.create = function(){
-    var game = this.gameState.game;
+    var game = this.gameState.game,
+        sf = this.sf;
 
     // Build the sprite entitiy
-    this.sprite = game.add.sprite(
-        game.world.centerX, game.world.centerY,
-        'sprites', this.displayStates.neutral
+    this.sprite = sf.createSprite(
+        'sprites',
+        this.displayStates.neutral,
+        {
+            x: game.world.centerX,
+            y: game.world.centerY,
+            anchor: {
+                x: 0.5,
+                y: 0.5
+            },
+            group: this.group
+        }
     );
-    // Anchor in the center of the sprite
-    this.sprite.anchor = {
-        x: 0.5,
-        y: 0.5
-    };
-    // Add it to the correct display group
-    this.group.add(this.sprite);
     this.sprite.events.onKilled.add(this.onKill.bind(this));
     this.sprite.body.setRectangle(83, 25, 8, 30);
     return this;
