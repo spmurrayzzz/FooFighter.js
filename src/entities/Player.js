@@ -52,16 +52,14 @@ proto.bindEvents = function(){
 
 
 proto.create = function(){
-    var game = this.gameState.game,
-        sf = this.sf;
+    var sf = this.sf;
 
     // Build the sprite entitiy
     this.sprite = sf.createSprite(
         'sprites',
         this.displayStates.neutral,
         {
-            x: game.world.centerX,
-            y: game.world.centerY,
+            align: 'center',
             anchor: {
                 x: 0.5,
                 y: 0.5
