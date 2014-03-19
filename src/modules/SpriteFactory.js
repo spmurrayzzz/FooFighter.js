@@ -37,7 +37,6 @@ proto.createSprite = function( sheet, frame, options ){
     if ( events !== null ) {
         for ( event in events ) {
             handlers = events[event];
-            console.log(event);
             for ( i = 0; i < handlers.length; i++ ) {
                 console.log(handlers[i]);
                 sprite.events[event].add(handlers[i]);
