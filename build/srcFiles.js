@@ -4,6 +4,7 @@ module.exports = [
     'bower_components/shout/shout.js',
     'src/modules/GameState.js',
     'src/modules/GameEngine.js',
+    'src/modules/SpriteFactory.js',
     'src/modules/StartScreen.js',
     'src/entities/Score.js',
     'src/entities/Timer.js',
