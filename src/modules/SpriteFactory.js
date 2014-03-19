@@ -15,6 +15,10 @@ proto.createSprite = function( sheet, frame, options ){
         anchor = options.anchor || null,
         x = options.x,
         y = options.y,
+        events = options.events || null,
+        event,
+        i,
+        handlers,
         sprite;
 
     if ( group === null ) {
@@ -23,11 +27,22 @@ proto.createSprite = function( sheet, frame, options ){
         sprite = group.create(x, y, sheet, frame);
     }
 
-    if ( anchor ) {
+    if ( anchor !== null ) {
         sprite.anchor = {
             x: anchor.x,
             y: anchor.y
         };
+    }
+
+    if ( events !== null ) {
+        for ( event in events ) {
+            handlers = events[event];
+            console.log(event);
+            for ( i = 0; i < handlers.length; i++ ) {
+                console.log(handlers[i]);
+                sprite.events[event].add(handlers[i]);
+            }
+        }
     }
 
     return sprite;

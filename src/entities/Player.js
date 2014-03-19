@@ -66,10 +66,14 @@ proto.create = function(){
                 x: 0.5,
                 y: 0.5
             },
-            group: this.group
+            group: this.group,
+            events: {
+                onKilled: [
+                    this.onKill.bind(this)
+                ]
+            }
         }
     );
-    this.sprite.events.onKilled.add(this.onKill.bind(this));
     this.sprite.body.setRectangle(83, 25, 8, 30);
     return this;
 };
