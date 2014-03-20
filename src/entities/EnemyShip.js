@@ -23,7 +23,10 @@ function EnemyShip ( gameState, group ) {
     this.lastFired = null;
     this.fireTimer = 5000;
     this.refs = {
-        update: null
+        update: function(){
+            this.checkFireLaser();
+            this.adjustAngle();
+        }.bind(this)
     };
     this.sf = new FooFighter.SpriteFactory(gameState);
 }
@@ -33,6 +36,7 @@ var proto = EnemyShip.prototype;
 
 proto.create = function(){
     var game = this.game,
+        vent = this.gameState.vent,
         sf = this.sf,
         minVelocity = this.velocityRange.min,
         maxVelocity = this.velocityRange.max,
@@ -47,11 +51,28 @@ proto.create = function(){
                 x: 0.5,
                 y: 0.5
             },
-            group: this.group
+            group: this.group,
+            recycle: true,
+            velocity: {
+                y: randInRange(minVelocity, maxVelocity)
+            },
+            events: {
+                onKilled: [
+                    function(){
+                        vent.off('update', this.refs.update);
+                    }.bind(this)
+                ],
+                onRevived: [
+                    function(){
+                        this.game.time.events.add(100, function(){
+                            this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
+                        }.bind(this));
+                    }.bind(this)
+                ]
+            }
         }
     );
     this.sprite.outOfBoundsKill = true;
-    this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
     this.bindEvents();
 };
 
@@ -59,21 +80,10 @@ proto.create = function(){
 proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
-    this.refs.update = function(){
-        this.checkFireLaser();
-        this.adjustAngle();
-    }.bind(this);
-
     vent.on('update', this.refs.update);
+
     vent.on('game-over', function(){
         vent.off('update', this.refs.update);
-    }.bind(this));
-    this.sprite.events.onKilled.add(function(){
-        vent.off('update', this.refs.update);
-        this.game.time.events.add(
-            5000,
-            this.sprite.destroy.bind(this.sprite)
-        );
     }.bind(this));
 };
 

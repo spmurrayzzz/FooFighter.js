@@ -15,6 +15,7 @@ proto.createSprite = function( sheet, frame, options ){
         anchor = options.anchor || null,
         align = options.align || null,
         recycle = options.recycle || null,
+        velocity = options.velocity || null,
         x = options.x,
         y = options.y,
         events = options.events || null,
@@ -31,7 +32,7 @@ proto.createSprite = function( sheet, frame, options ){
     if ( group === null ) {
         sprite = game.add.sprite(x, y, sheet, frame);
     } else {
-        if ( recycle ) {
+        if ( recycle !== null ) {
             sprite = this.recycleSprite(group, options);
             if ( !sprite ) {
                 sprite = group.create(x, y, sheet, frame);
@@ -48,7 +49,13 @@ proto.createSprite = function( sheet, frame, options ){
         };
     }
 
-    if ( events !== null ) {
+    if ( velocity !== null ) {
+        for ( var v in velocity ) {
+            sprite.body.velocity[v] = velocity[v];
+        }
+    }
+
+    if ( events !== null && recycle !== null ) {
         for ( event in events ) {
             handlers = events[event];
             for ( i = 0; i < handlers.length; i++ ) {
