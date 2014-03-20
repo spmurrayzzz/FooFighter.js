@@ -13,6 +13,7 @@
 function EnemyShip ( gameState, group ) {
     this.gameState = gameState;
     this.game = gameState.game;
+    this.vent = gameState.vent;
     this.group = group;
     this.sprite = null;
     this.velocityRange = {
@@ -26,6 +27,9 @@ function EnemyShip ( gameState, group ) {
         update: function(){
             this.checkFireLaser();
             this.adjustAngle();
+        }.bind(this),
+        gameOver: function(){
+            this.vent.off('update', this.refs.update);
         }.bind(this)
     };
     this.sf = new FooFighter.SpriteFactory(gameState);
@@ -60,6 +64,9 @@ proto.create = function(){
                 onKilled: [
                     function(){
                         vent.off('update', this.refs.update);
+                    }.bind(this),
+                    function(){
+                        vent.off('gameover', this.refs.gameOver);
                     }.bind(this)
                 ],
                 onRevived: [
@@ -81,10 +88,7 @@ proto.bindEvents = function(){
     var vent = this.gameState.vent;
 
     vent.on('update', this.refs.update);
-
-    vent.on('game-over', function(){
-        vent.off('update', this.refs.update);
-    }.bind(this));
+    vent.on('game-over', this.refs.gameOver);
 };
 
 
