@@ -22,7 +22,8 @@ proto.createSprite = function( sheet, frame, options ){
         event,
         i,
         handlers,
-        sprite;
+        sprite,
+        didRecycle = false;
 
     if ( align === 'center' ) {
         x = game.world.centerX;
@@ -36,6 +37,8 @@ proto.createSprite = function( sheet, frame, options ){
             sprite = this.recycleSprite(group, options);
             if ( !sprite ) {
                 sprite = group.create(x, y, sheet, frame);
+            } else {
+                didRecycle = true;
             }
         } else {
             sprite = group.create(x, y, sheet, frame);
@@ -55,7 +58,7 @@ proto.createSprite = function( sheet, frame, options ){
         }
     }
 
-    if ( events !== null && recycle !== null ) {
+    if ( events !== null && didRecycle !== null ) {
         for ( event in events ) {
             handlers = events[event];
             for ( i = 0; i < handlers.length; i++ ) {
