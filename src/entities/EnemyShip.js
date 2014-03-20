@@ -25,6 +25,7 @@ function EnemyShip ( gameState, group ) {
     this.refs = {
         update: null
     };
+    this.sf = new FooFighter.SpriteFactory(gameState);
 }
 
 var proto = EnemyShip.prototype;
@@ -32,20 +33,23 @@ var proto = EnemyShip.prototype;
 
 proto.create = function(){
     var game = this.game,
+        sf = this.sf,
         minVelocity = this.velocityRange.min,
         maxVelocity = this.velocityRange.max,
         randInRange = FooFighter.Util.randInRange;
 
-    this.sprite = this.group.create(
-        game.world.width * Math.random(),
-        -20,
-        'sprites',
-        'enemyShip.png'
+    this.sprite = sf.createSprite(
+        'sprites', 'enemyShip.png',
+        {
+            x: game.world.width * Math.random(),
+            y: -20,
+            anchor: {
+                x: 0.5,
+                y: 0.5
+            },
+            group: this.group
+        }
     );
-    this.sprite.anchor = {
-        x: 0.5,
-        y: 0.5
-    };
     this.sprite.outOfBoundsKill = true;
     this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
     this.bindEvents();
