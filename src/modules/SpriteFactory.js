@@ -14,6 +14,7 @@ proto.createSprite = function( sheet, frame, options ){
         group = options.group || null,
         anchor = options.anchor || null,
         align = options.align || null,
+        recycle = options.recycle || null,
         x = options.x,
         y = options.y,
         events = options.events || null,
@@ -30,7 +31,14 @@ proto.createSprite = function( sheet, frame, options ){
     if ( group === null ) {
         sprite = game.add.sprite(x, y, sheet, frame);
     } else {
-        sprite = group.create(x, y, sheet, frame);
+        if ( recycle ) {
+            sprite = this.recycleSprite(group, options);
+            if ( !sprite ) {
+                sprite = group.create(x, y, sheet, frame);
+            }
+        } else {
+            sprite = group.create(x, y, sheet, frame);
+        }
     }
 
     if ( anchor !== null ) {
