@@ -169,9 +169,8 @@ proto.createLaser = function(){
         // Clean up any lasers that leave the game scence
         laser.outOfBoundsKill = true;
     } else {
+        laser.reset(pos.x, pos.y);
         laser.revive();
-        laser.x = pos.x;
-        laser.y = pos.y;
     }
 
     laser.body.velocity.y = velocity;

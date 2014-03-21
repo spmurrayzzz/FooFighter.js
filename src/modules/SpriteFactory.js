@@ -83,8 +83,8 @@ proto.recycleSprite = function( group, options ){
     if ( !sprite ) {
         return false;
     } else {
-        sprite.revive();
         sprite.reset(options.x, options.y);
+        sprite.revive();
     }
 
     return sprite;
