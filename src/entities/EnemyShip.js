@@ -10,6 +10,8 @@
 
 ;(function( FooFighter ){
 
+'use strict';
+
 function EnemyShip ( gameState, group ) {
     this.gameState = gameState;
     this.game = gameState.game;
