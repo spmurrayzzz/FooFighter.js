@@ -1,3 +1,11 @@
+/**
+ * SpriteFactory.js
+ *
+ * FooFighter.js - Sprite Factory module
+ *
+ * The purpose of this module is to abstract the sprite creation
+ * and recycling routines provided by Phaser.
+ */
 
 ;(function( FooFighter ){
 
