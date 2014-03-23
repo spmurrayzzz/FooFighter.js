@@ -118,24 +118,21 @@ proto.fireLaser = function(){
         y:this.sprite.body.y + this.sprite.height + 20
     };
 
-    laser = group.getFirstExists(false);
+    laser = this.sf.createSprite(
+        'sprites', 'laserRed.png',
+        {
+            x: pos.x,
+            y: pos.y,
+            anchor: {
+                x: 0.5,
+                y: 0.5
+            },
+            recycle: true,
+            group: group
+        }
+    );
 
-    if ( !laser ) {
-        laser = group.create(
-            pos.x,
-            pos.y,
-            'sprites',
-            'laserRed.png'
-        );
-        laser.anchor = {
-            x: 0,
-            y: 0
-        };
-        laser.outOfBoundsKill = true;
-    } else {
-        laser.revive().reset(pos.x, pos.y);
-    }
-
+    laser.outOfBoundsKill = true;
     angle = Math.atan2(
         (player.y - laser.y),
         (player.x - laser.x)
