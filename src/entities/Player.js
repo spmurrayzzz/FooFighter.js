@@ -152,27 +152,20 @@ proto.createLaser = function(){
         y:this.sprite.body.y - 10
     };
 
-    laser = this.lasers.getFirstExists(false);
-
-    if ( !laser ) {
-        // Create our laser sprite entity
-        laser = this.lasers.create(
-            pos.x,
-            pos.y,
-            'sprites', 'laserGreen.png'
-        );
-        // Anchor to the center of the sprite
-        laser.anchor = {
-            x: 0.5,
-            y: 0.5
-        };
-        // Clean up any lasers that leave the game scence
-        laser.outOfBoundsKill = true;
-    } else {
-        laser.reset(pos.x, pos.y);
-        laser.revive();
-    }
-
+    laser = this.sf.createSprite(
+        'sprites', 'laserGreen.png',
+        {
+            x: pos.x,
+            y: pos.y,
+            anchor: {
+                x: 0.5,
+                y: 0.5
+            },
+            recycle: true,
+            group: this.lasers
+        }
+    );
+    laser.outOfBoundsKill = true;
     laser.body.velocity.y = velocity;
 
     return this;
