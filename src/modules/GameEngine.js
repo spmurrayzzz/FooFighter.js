@@ -126,7 +126,7 @@ proto.createUFO = function(){
 
 
 proto.createAsteroid = function( pos, sizeVal ){
-    var asteroids = this.asteroids,
+    var asteroids,
         percent = this.config.bigToSmallPercentage,
         isUndefined = FooFighter.Util.isUndefined,
         newRoid;
@@ -138,8 +138,9 @@ proto.createAsteroid = function( pos, sizeVal ){
         }
     }
 
-    newRoid = new FooFighter.Asteroid(this.gameState).create(sizeVal, pos);
-    asteroids.add(newRoid.sprite);
+    asteroids = this.asteroids[sizeVal];
+    newRoid = new FooFighter.Asteroid(this.gameState, asteroids)
+        .create(sizeVal, pos);
     return newRoid;
 };
 
@@ -147,7 +148,7 @@ proto.createAsteroid = function( pos, sizeVal ){
 proto.checkCollisions = function(){
     // Asteroids / player lasers
     this.game.physics.collide(
-        this.asteroids,
+        this.asteroids[0],
         this.lasers,
         this.collisionHandlerLaser,
         null,
@@ -156,7 +157,22 @@ proto.checkCollisions = function(){
     // Player / asteroids
     this.game.physics.collide(
         this.gameState.entities.player.sprite,
-        this.asteroids, this.collisionHandlerPlayer,
+        this.asteroids[0], this.collisionHandlerPlayer,
+        null,
+        this
+    );
+    // Asteroids / player lasers
+    this.game.physics.collide(
+        this.asteroids[1],
+        this.lasers,
+        this.collisionHandlerLaser,
+        null,
+        this
+    );
+    // Player / asteroids
+    this.game.physics.collide(
+        this.gameState.entities.player.sprite,
+        this.asteroids[1], this.collisionHandlerPlayer,
         null,
         this
     );
@@ -240,7 +256,8 @@ proto.asteroidExplosion = function ( asteroid ) {
 
 
 proto.killAll = function(){
-    this.asteroids.removeAll();
+    this.asteroids[0].removeAll();
+    this.asteroids[1].removeAll();
     this.enemyShips.removeAll();
     this.enemyLasers.removeAll();
     this.enemyUFOs.removeAll();

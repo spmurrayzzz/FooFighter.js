@@ -22,17 +22,18 @@ app = {
      * @return {void}
      */
     preload: function(){
-        var entities    = gameState.entities,
-            modules     = gameState.modules,
-            background  = game.add.group(),
-            backGroup   = game.add.group(),
-            frontGroup  = game.add.group(),
-            asteroids   = game.add.group(),
-            enemyShips  = game.add.group(),
-            enemyUFOs   = game.add.group(),
-            lasers      = game.add.group(),
-            enemyLasers = game.add.group(),
-            hudGroup    = game.add.group();
+        var entities        = gameState.entities,
+            modules         = gameState.modules,
+            background      = game.add.group(),
+            backGroup       = game.add.group(),
+            frontGroup      = game.add.group(),
+            bigAsteroids    = game.add.group(),
+            smallAsteroids  = game.add.group(),
+            enemyShips      = game.add.group(),
+            enemyUFOs       = game.add.group(),
+            lasers          = game.add.group(),
+            enemyLasers     = game.add.group(),
+            hudGroup        = game.add.group();
 
         // Keep group references so we can maintain a proper display index
         gameState.groups = {
@@ -40,7 +41,10 @@ app = {
             backGroup: backGroup,
             frontGroup: frontGroup,
             hudGroup: hudGroup,
-            asteroids: asteroids,
+            asteroids: [
+                bigAsteroids,
+                smallAsteroids
+            ],
             enemyShips: enemyShips,
             enemyUFOs: enemyUFOs,
             lasers: lasers,

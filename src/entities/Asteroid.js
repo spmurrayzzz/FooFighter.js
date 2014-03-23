@@ -24,6 +24,7 @@ function Asteroid ( gameState, group ) {
         0: 'Big',
         1: 'Small'
     };
+    this.sf = new FooFighter.SpriteFactory(gameState);
     this.bindEvents();
 }
 
@@ -31,7 +32,6 @@ var proto = Asteroid.prototype;
 
 
 proto.bindEvents = function(){
-    this.vent.on('update', this.adjustVelocity.bind(this));
     return this;
 };
 
@@ -56,14 +56,28 @@ proto.create = function( typeVal, pos ) {
     }
 
     // Start building the sprite from our atlas
-    this.sprite = game.add.sprite(
-        targetX, targetY, 'sprites', 'meteor' + size + '.png'
+    this.sprite = this.sf.createSprite(
+        'sprites', 'meteor' + size + '.png',
+        {
+            x: targetX,
+            y: targetY,
+            anchor: {
+                x: 0.5,
+                y: 0.5
+            },
+            recycle: true,
+            group: this.group,
+            events: {
+                onRevived: [
+                    function(){
+                        this.game.time.events.add(100, function(){
+                            this.sprite.body.velocity.y = randInRange(minVelocity, maxVelocity);
+                        }.bind(this));
+                    }.bind(this)
+                ]
+            }
+        }
     );
-    // Put the anchor in the center of the sprite
-    this.sprite.anchor = {
-        x: 0.5,
-        y: 0.5
-    };
     // Make sure we detect when the sprite is outside of the game scene
     this.sprite.outOfBoundsKill = true;
     // Give our asteroid a random Y axis velocity
@@ -81,19 +95,6 @@ proto.create = function( typeVal, pos ) {
     }
     this.sprite.body.velocity.x = xVelocity * modifier;
 
-    this.sprite.events.onKilled.add(function(){
-        this.game.time.events.add(
-            5000,
-            this.sprite.destroy.bind(this.sprite)
-        );
-    }.bind(this));
-
-    return this;
-};
-
-
-proto.adjustVelocity = function(){
-    // @TODO maybe have a variant velocity that reacts to player movement?
     return this;
 };
 
