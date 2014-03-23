@@ -17,6 +17,7 @@ function EnemyUFO ( gameState, group ) {
     this.game = gameState.game;
     this.vent = gameState.vent;
     this.group = group;
+    this.sf = new FooFighter.SpriteFactory(gameState);
     this.sprite = null;
 }
 
@@ -27,16 +28,20 @@ proto.create = function(){
     var game = this.game,
         player = this.gameState.entities.player.sprite;
 
-    this.sprite = this.group.create(
-        game.world.width * Math.random(),
-        -20,
+    this.sprite = this.sf.createSprite(
         'sprites',
-        'enemyUFO.png'
+        'enemyUFO.png',
+        {
+            x: game.world.width * Math.random(),
+            y: -20,
+            anchor: {
+                x: 0.5,
+                y: 0.5
+            },
+            recycle: true,
+            group: this.group
+        }
     );
-    this.sprite.anchor = {
-        x: 0.5,
-        y: 0.5
-    };
     this.sprite.outOfBoundsKill = true;
     this.game.physics.accelerateToXY(
         this.sprite,
@@ -50,12 +55,7 @@ proto.create = function(){
 
 
 proto.bindEvents = function(){
-    this.sprite.events.onKilled.add(function(){
-        this.game.time.events.add(
-            5000,
-            this.sprite.destroy.bind(this.sprite)
-        );
-    }.bind(this));
+
 };
 
 
