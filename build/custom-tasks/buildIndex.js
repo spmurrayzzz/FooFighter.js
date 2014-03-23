@@ -16,12 +16,12 @@ module.exports = function( grunt ){
             if ( fs.existsSync('./.production') ) {
                 newContent = content.replace(
                     /{{ build }}/g, '.min.js'
-                ).replace('{{ time }}', currTime);
+                ).replace(/{{ time }}/g, currTime);
                 msg = 'Built production version of index.html';
             } else {
                 newContent = content.replace(
                     /{{ build }}/g, '.js'
-                ).replace('{{ time }}', currTime);
+                ).replace(/{{ time }}/g, currTime);
                 msg = 'Built development version of index.html';
             }
 
