@@ -65,7 +65,7 @@ app = {
         game.stage.scale.setShowAll();
         game.stage.scale.refresh();
 
-        game.stage.backgroundColor = '#36200a';
+        game.stage.backgroundColor = '#301404';
 
         // Create discrete game objects/entities
         gameState.gameEngine = new FooFighter.GameEngine(gameState);
