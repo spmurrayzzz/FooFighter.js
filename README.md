@@ -46,5 +46,5 @@ grunt watch
 
 #### Game art provided by:
 
-- [Jack Jerz](http://jackjerz.blogspot.com/)
+- [Jack Jerz](https://www.facebook.com/JChasm)
 - [http://kenney.nl/post/space-shooter-art](http://kenney.nl/post/space-shooter-art)
