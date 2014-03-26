@@ -9,6 +9,8 @@
 
 ;(function( FooFighter ){
 
+'use strict';
+
 function SpriteFactory ( gameState ) {
     this.gameState = gameState;
     this.game = gameState.game;
