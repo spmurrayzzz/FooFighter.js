@@ -1,7 +1,6 @@
 module.exports = [
     'src/namespace.js',
     'src/modules/Util.js',
-    'bower_components/shout/shout.js',
     'src/modules/GameState.js',
     'src/modules/GameEngine.js',
     'src/modules/SpriteFactory.js',

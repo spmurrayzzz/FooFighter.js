@@ -11,6 +11,6 @@
   ],
   "devDependencies": {
     "phaser": "1.1.6",
-    "shout": "0.2.2"
+    "shout": "~0.2.2"
   }
 }
