@@ -2,7 +2,7 @@
 dist/
 bower_components/
 node_modules/
-fabfile.py
+fabConfig.json
 *.pyc
 index.html
 .production
