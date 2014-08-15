@@ -22,7 +22,7 @@ on collisions.
 
 ```bash
 # Install global grunt module
-sudo npm install -g grunt
+sudo npm install -g grunt-cli
 
 # Install package dependencies and build
 npm install
